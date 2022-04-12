@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Likegram.Core.Utilities.Security.Encryption
 {
-    public class SecurityTokenHelper
+    public class SecurityKeyHelper
     {
         public static SecurityKey CreateSecurityToken(string token)
         {
