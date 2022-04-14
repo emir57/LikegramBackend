@@ -17,6 +17,7 @@ namespace Likegram.Business.Abstract
         Task<IDataResult<User>> GetByEmail(string email);
         Task<IDataResult<User>> GetByUsername(string userName);
         Task<IDataResult<User>> GetById(int id);
+        Task<IDataResult<List<User>>> GetAll();
 
         Task<IDataResult<List<User>>> UserRoles(User user);
     }
