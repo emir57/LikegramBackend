@@ -17,7 +17,7 @@ namespace Likegram.DataAccess.Contexts
         {
             optionsBuilder.UseSqlServer(@"Server=DESKTOP-HVLQH67\SQLEXPRESS;Database=LikegramDb;integrated security=true;");
         }
-        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        public async override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             var datas = ChangeTracker.Entries<BaseEntity>();
             foreach (var data in datas)
@@ -30,7 +30,7 @@ namespace Likegram.DataAccess.Contexts
                     _ => DateTime.Now
                 };
             }
-            return base.SaveChangesAsync(cancellationToken);
+            return await base.SaveChangesAsync(cancellationToken);
         }
         public List<User> Users { get; set; }
         public List<Role> Roles { get; set; }
