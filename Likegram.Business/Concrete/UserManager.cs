@@ -1,4 +1,5 @@
 ﻿using Likegram.Business.Abstract;
+using Likegram.Business.Constants;
 using Likegram.Core.Entities.Concrete;
 using Likegram.Core.Utilities.Result;
 using Likegram.DataAccess.Abstract;
@@ -21,42 +22,50 @@ namespace Likegram.Business.Concrete
 
         public async Task<IResult> Add(User user)
         {
-            throw new NotImplementedException();
+            await _userDal.Add(user);
+            return new SuccessResult(BusinessMessages.EklemeBasarili);
         }
 
-        public Task<IResult> Delete(User user)
+        public async Task<IResult> Delete(User user)
         {
-            throw new NotImplementedException();
+            await _userDal.Delete(user);
+            return new SuccessResult(BusinessMessages.SilmeBasarili);
         }
 
-        public Task<IDataResult<List<User>>> GetAll()
+        public async Task<IDataResult<List<User>>> GetAll()
         {
-            throw new NotImplementedException();
+            var result = await _userDal.GetAll();
+            return new SuccessDataResult<List<User>>(result, BusinessMessages.ListelemeBasarili);
         }
 
-        public Task<IDataResult<User>> GetByEmail(string email)
+        public async Task<IDataResult<User>> GetByEmail(string email)
         {
-            throw new NotImplementedException();
+            var result = await _userDal.Get(u=>u.Email == email);
+            return new SuccessDataResult<User>(result, BusinessMessages.GetirmeBasarili);
         }
 
-        public Task<IDataResult<User>> GetById(int id)
+        public async Task<IDataResult<User>> GetById(int id)
         {
-            throw new NotImplementedException();
+            var result = await _userDal.Get(u => u.Id == id);
+            return new SuccessDataResult<User>(result, BusinessMessages.GetirmeBasarili);
         }
 
-        public Task<IDataResult<User>> GetByUsername(string userName)
+        public async Task<IDataResult<User>> GetByUsername(string userName)
         {
-            throw new NotImplementedException();
+            var result = await _userDal.Get(u => u.Username == userName);
+            return new SuccessDataResult<User>(result, BusinessMessages.GetirmeBasarili);
         }
 
-        public Task<IResult> Update(User user)
+        public async Task<IResult> Update(User user)
         {
-            throw new NotImplementedException();
+            await _userDal.Update(user);
+            return new SuccessResult(BusinessMessages.GuncellemeBasarili);
         }
 
-        public Task<IDataResult<List<User>>> UserRoles(User user)
+        public IDataResult<List<Role>> UserRoles(User user)
         {
-            throw new NotImplementedException();
+            var roles = _userDal.UserRoles(user);
+            return new SuccessDataResult<List<Role>>(roles, BusinessMessages.ListelemeBasarili);
         }
     }
 }

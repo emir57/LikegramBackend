@@ -19,6 +19,6 @@ namespace Likegram.Business.Abstract
         Task<IDataResult<User>> GetById(int id);
         Task<IDataResult<List<User>>> GetAll();
 
-        Task<IDataResult<List<User>>> UserRoles(User user);
+        IDataResult<List<Role>> UserRoles(User user);
     }
 }
