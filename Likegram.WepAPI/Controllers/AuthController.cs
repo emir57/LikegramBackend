@@ -1,5 +1,6 @@
 ﻿using Likegram.Business.Abstract;
 using Likegram.Core.Entities.Dtos;
+using Likegram.Core.Utilities.Result;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -32,7 +33,13 @@ namespace Likegram.WepAPI.Controllers
             {
                 return BadRequest(token);
             }
-            return Ok(token);
+            var loginResponse = new LoginResponseDto
+            {
+                User = result.Data,
+                AccessToken = token.Data
+            };
+            var data = new SuccessDataResult<LoginResponseDto>(loginResponse, "Giriş Başarılı");
+            return Ok(data);
         }
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)

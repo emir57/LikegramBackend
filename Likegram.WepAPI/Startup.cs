@@ -57,6 +57,15 @@ namespace Likegram.WepAPI
             services.AddDependencyResolvers(
                 new CoreModule()
                 );
+            services.AddCors(opt =>
+            {
+                opt.AddDefaultPolicy(policy =>
+                {
+                    policy.AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .WithOrigins("http://localhost:8100");
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -70,7 +79,7 @@ namespace Likegram.WepAPI
             }
 
             app.UseHttpsRedirection();
-
+            app.UseCors();
             app.UseRouting();
 
             app.UseAuthentication();
