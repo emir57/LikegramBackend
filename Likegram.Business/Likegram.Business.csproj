@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Likegram.Core\Likegram.Core.csproj" />
+    <ProjectReference Include="..\Likegram.DataAccess\Likegram.DataAccess.csproj" />
   </ItemGroup>
 
 </Project>

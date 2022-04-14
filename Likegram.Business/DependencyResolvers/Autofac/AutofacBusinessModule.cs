@@ -10,6 +10,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Autofac.Extras.DynamicProxy;
 using Likegram.Core.Utilities.Interceptors;
+using Likegram.DataAccess.Concrete.EntityFramework;
+using Likegram.DataAccess.Abstract;
 
 namespace Likegram.Business.DependencyResolvers.Autofac
 {
@@ -18,9 +20,18 @@ namespace Likegram.Business.DependencyResolvers.Autofac
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<AuthManager>().As<IAuthService>().SingleInstance();
+            #region DataAccess Registers
+            builder.RegisterType<EfCommentAnswerDal>().As<ICommentAnswerDal>().SingleInstance();
+            builder.RegisterType<EfCommentLikeDal>().As<ICommentLikeDal>().SingleInstance();
+            builder.RegisterType<EfPostCommentDal>().As<IPostCommentDal>().SingleInstance();
+            builder.RegisterType<EfPostDal>().As<IPostDal>().SingleInstance();
+            builder.RegisterType<EfPostLikeDal>().As<IPostLikeDal>().SingleInstance();
+            builder.RegisterType<EfRoleDal>().As<IRoleDal>().SingleInstance();
+            builder.RegisterType<EfUserDal>().As<IUserDal>().SingleInstance();
+            builder.RegisterType<EfUserRoleDal>().As<IUserRoleDal>().SingleInstance();
+            #endregion
 
             builder.RegisterType<HttpContextAccessor>().As<IHttpContextAccessor>().SingleInstance();
-
             builder.RegisterType<JwtHelper>().As<ITokenHelper>().SingleInstance();
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
