@@ -34,13 +34,13 @@ namespace Likegram.Business.Concrete
         public async Task<IDataResult<User>> Login(UserForLoginDto userForLoginDto)
         {
             var user = await _userService.GetByEmail(userForLoginDto.Email);
-            if(user == null)
+            if(user.Data == null)
             {
                 return new ErrorDataResult<User>(user.Data, BusinessMessages.KullaniciAdiVeyaSifreHatali);
             }
             if (!HashingHelper.VerifyPasswordHash(user.Data.PasswordHash, user.Data.PasswordSalt, userForLoginDto.Password))
             {
-                return new ErrorDataResult<User>(user.Data, BusinessMessages.KullaniciAdiVeyaSifreHatali);
+                return new ErrorDataResult<User>(BusinessMessages.KullaniciAdiVeyaSifreHatali);
             }
             return new SuccessDataResult<User>(user.Data, BusinessMessages.GirisBasirili);
         }
@@ -49,7 +49,7 @@ namespace Likegram.Business.Concrete
         {
             byte[] passwordHash, passwordSalt;
             var checkUser = await _userService.GetByEmail(userForRegisterDto.Email);
-            if(checkUser != null)
+            if(checkUser.Data != null)
             {
                 return new ErrorDataResult<User>(BusinessMessages.KullaniciZatenMevcut);
             }

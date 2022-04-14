@@ -18,10 +18,9 @@ namespace Likegram.Core.DataAccess.Entityframework
         {
             using (var context = new TContext())
             {
-                EntityEntry entityEntry = context.Entry(entity);
-                bool result = entityEntry.State == EntityState.Added;
+                context.Entry(entity).State = EntityState.Added;
                 await context.SaveChangesAsync();
-                return result;
+                return true;
             }
         }
 
@@ -29,10 +28,9 @@ namespace Likegram.Core.DataAccess.Entityframework
         {
             using (var context = new TContext())
             {
-                EntityEntry entityEntry = context.Entry(entity);
-                bool result = entityEntry.State == EntityState.Deleted;
-                //await context.SaveChangesAsync();
-                return result;
+                context.Entry(entity).State = EntityState.Deleted;
+                await context.SaveChangesAsync();
+                return true;
             }
         }
 
@@ -64,10 +62,9 @@ namespace Likegram.Core.DataAccess.Entityframework
         {
             using(var context = new TContext())
             {
-                EntityEntry<TEntity> entityEntry = context.Entry(entity);
-                bool result = entityEntry.State == EntityState.Modified;
+                context.Entry(entity).State = EntityState.Modified;
                 await context.SaveChangesAsync();
-                return result;
+                return true;
             }
         }
     }

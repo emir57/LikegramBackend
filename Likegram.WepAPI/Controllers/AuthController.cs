@@ -27,7 +27,12 @@ namespace Likegram.WepAPI.Controllers
             {
                 return BadRequest(result);
             }
-            return Ok(result);
+            var token = _authService.CreateToken(result.Data);
+            if (!token.Success)
+            {
+                return BadRequest(token);
+            }
+            return Ok(token);
         }
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)

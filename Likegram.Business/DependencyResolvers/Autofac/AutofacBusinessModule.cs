@@ -22,10 +22,10 @@ namespace Likegram.Business.DependencyResolvers.Autofac
             
             #region DataAccess Registers
             builder.RegisterType<EfCommentAnswerDal>().As<ICommentAnswerDal>().SingleInstance();
-            builder.RegisterType<EfCommentLikeDal>().As<ICommentLikeDal>().SingleInstance();
+            //builder.RegisterType<EfCommentLikeDal>().As<ICommentLikeDal>().SingleInstance();
             builder.RegisterType<EfPostCommentDal>().As<IPostCommentDal>().SingleInstance();
             builder.RegisterType<EfPostDal>().As<IPostDal>().SingleInstance();
-            builder.RegisterType<EfPostLikeDal>().As<IPostLikeDal>().SingleInstance();
+            //builder.RegisterType<EfPostLikeDal>().As<IPostLikeDal>().SingleInstance();
             builder.RegisterType<EfRoleDal>().As<IRoleDal>().SingleInstance();
             builder.RegisterType<EfUserDal>().As<IUserDal>().SingleInstance();
             builder.RegisterType<EfUserRoleDal>().As<IUserRoleDal>().SingleInstance();

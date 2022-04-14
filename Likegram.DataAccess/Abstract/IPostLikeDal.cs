@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Likegram.DataAccess.Abstract
 {
-    public interface IPostLikeDal : IEntityRepository<PostLike>
+    public interface IPostLikeDal
     {
     }
 }

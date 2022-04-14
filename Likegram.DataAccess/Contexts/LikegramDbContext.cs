@@ -34,11 +34,6 @@ namespace Likegram.DataAccess.Contexts
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<PostLike>()
-                .HasKey(p => new { p.PostId, p.UserId });
-            modelBuilder.Entity<CommentLike>()
-                .HasKey(p => new { p.CommentId, p.UserId });
-
             base.OnModelCreating(modelBuilder);
         }
 
