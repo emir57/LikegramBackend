@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Likegram.Business.Abstract
+namespace Likegram.Core.Utilities.Result
 {
-    public interface IAuthService
+    public interface IResult
     {
-
+        string Message { get; }
+        bool Success { get; }
     }
 }
