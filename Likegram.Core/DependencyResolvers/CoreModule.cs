@@ -14,6 +14,7 @@ namespace Likegram.Core.DependencyResolvers
     {
         public void Load(IServiceCollection services)
         {
+            services.AddMemoryCache();
             services.AddSingleton<Stopwatch>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
