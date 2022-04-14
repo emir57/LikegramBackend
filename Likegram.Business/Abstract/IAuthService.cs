@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Likegram.Core.Entities.Concrete;
+using Likegram.Core.Entities.Dtos;
+using Likegram.Core.Utilities.Result;
+using Likegram.Core.Utilities.Security.JWT;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +12,8 @@ namespace Likegram.Business.Abstract
 {
     public interface IAuthService
     {
-
+        Task<IDataResult<AccessToken>> CreateToken(User user, List<Role> roles);
+        Task<IDataResult<User>> Login(UserForLoginDto userForLoginDto);
+        Task<IDataResult<User>> Register(UserForRegisterDto userForRegisterDto);
     }
 }
