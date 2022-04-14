@@ -13,7 +13,7 @@ namespace Likegram.DataAccess.Concrete.EntityFramework
 {
     public class EfUserDal : EFEntityRepostioryBase<User, LikegramDbContext>, IUserDal
     {
-        public async Task<List<Role>> UserRoles(User user)
+        public List<Role> UserRoles(User user)
         {
             using (var context = new LikegramDbContext())
             {

@@ -10,6 +10,6 @@ namespace Likegram.DataAccess.Abstract
 {
     public interface IUserDal : IEntityRepository<User>
     {
-        Task<List<Role>> UserRoles(User user);
+        List<Role> UserRoles(User user);
     }
 }
