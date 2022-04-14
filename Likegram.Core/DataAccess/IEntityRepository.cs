@@ -11,9 +11,9 @@ namespace Likegram.Core.DataAccess
     public interface IEntityRepository<T>
         where T : BaseEntity, new()
     {
-        Task Add(T entity);
-        Task Update(T entity);
-        Task Delete(T entity);
+        Task<bool> Add(T entity);
+        Task<bool> Update(T entity);
+        Task<bool> Delete(T entity);
         Task<T> Get(Expression<Func<T, bool>> filter);
         Task<List<T>> GetAll(Expression<Func<T, bool>> filter);
         Task<List<T>> GetAll();
