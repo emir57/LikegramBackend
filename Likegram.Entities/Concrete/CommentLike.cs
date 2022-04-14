@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Likegram.Entities.Concrete
 {
-    public class CommentLike : BaseEntity
+    public class CommentLike
     {
         public int UserId { get; set; }
         public User User { get; set; }

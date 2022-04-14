@@ -31,7 +31,7 @@ namespace Likegram.Core.DataAccess.Entityframework
             {
                 EntityEntry entityEntry = context.Entry(entity);
                 bool result = entityEntry.State == EntityState.Deleted;
-                await context.SaveChangesAsync();
+                //await context.SaveChangesAsync();
                 return result;
             }
         }

@@ -1,4 +1,5 @@
 ﻿using Likegram.Core.Entities;
+using Likegram.Core.Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,9 @@ namespace Likegram.Entities.Concrete
     public class CommentAnswer : BaseEntity
     {
         public int CommentId { get; set; }
+        public PostComment PostComment { get; set; }
         public int UserId { get; set; }
+        public User User { get; set; }
         public string Answer { get; set; }
     }
 }

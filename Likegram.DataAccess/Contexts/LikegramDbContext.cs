@@ -24,22 +24,32 @@ namespace Likegram.DataAccess.Contexts
             {
                 var _ = data.State switch
                 {
-                    EntityState.Added => DateTime.Now,
-                    EntityState.Modified => DateTime.Now,
-                    EntityState.Deleted => DateTime.Now,
+                    EntityState.Added => data.Entity.CreatedDate = DateTime.Now,
+                    EntityState.Modified => data.Entity.UpdatedDate = DateTime.Now,
+                    EntityState.Deleted => data.Entity.DeletedDate = DateTime.Now,
                     _ => DateTime.Now
                 };
             }
             return await base.SaveChangesAsync(cancellationToken);
         }
-        public List<User> Users { get; set; }
-        public List<Role> Roles { get; set; }
-        public List<UserRole> UserRoles { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<PostLike>()
+                .HasKey(p => new { p.PostId, p.UserId });
+            modelBuilder.Entity<CommentLike>()
+                .HasKey(p => new { p.CommentId, p.UserId });
 
-        public List<Post> Posts { get; set; }
-        public List<PostComment> PostComments { get; set; }
-        public List<CommentAnswer> CommentAnswers { get; set; }
-        public List<PostLike> PostLikes { get; set; }
-        public List<CommentLike> CommentLikes { get; set; }
+            base.OnModelCreating(modelBuilder);
+        }
+
+        public DbSet<User> Users { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<UserRole> UserRoles { get; set; }
+
+        public DbSet<Post> Posts { get; set; }
+        public DbSet<PostComment> PostComments { get; set; }
+        public DbSet<CommentAnswer> CommentAnswers { get; set; }
+        public DbSet<PostLike> PostLikes { get; set; }
+        public DbSet<CommentLike> CommentLikes { get; set; }
     }
 }
