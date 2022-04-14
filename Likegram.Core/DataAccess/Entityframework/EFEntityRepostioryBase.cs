@@ -36,19 +36,28 @@ namespace Likegram.Core.DataAccess.Entityframework
             }
         }
 
-        public Task<TEntity> Get(Expression<Func<TEntity, bool>> filter)
+        public async Task<TEntity> Get(Expression<Func<TEntity, bool>> filter)
         {
-            throw new NotImplementedException();
+            using (var context = new TContext())
+            {
+                return await context.Set<TEntity>().SingleOrDefaultAsync(filter);
+            }
         }
 
-        public Task<List<TEntity>> GetAll(Expression<Func<TEntity, bool>> filter)
+        public async Task<List<TEntity>> GetAll(Expression<Func<TEntity, bool>> filter)
         {
-            throw new NotImplementedException();
+            using (var context = new TContext())
+            {
+                return await context.Set<TEntity>().Where(filter).ToListAsync();
+            }
         }
 
-        public Task<List<TEntity>> GetAll()
+        public async Task<List<TEntity>> GetAll()
         {
-            throw new NotImplementedException();
+            using (var context = new TContext())
+            {
+                return await context.Set<TEntity>().ToListAsync();
+            }
         }
 
         public async Task<bool> Update(TEntity entity)
