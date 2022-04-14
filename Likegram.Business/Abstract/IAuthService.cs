@@ -12,7 +12,7 @@ namespace Likegram.Business.Abstract
 {
     public interface IAuthService
     {
-        Task<IDataResult<AccessToken>> CreateToken(User user, List<Role> roles);
+        IDataResult<AccessToken> CreateToken(User user);
         Task<IDataResult<User>> Login(UserForLoginDto userForLoginDto);
         Task<IDataResult<User>> Register(UserForRegisterDto userForRegisterDto);
     }

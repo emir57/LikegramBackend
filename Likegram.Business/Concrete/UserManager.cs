@@ -1,5 +1,6 @@
 ﻿using Likegram.Business.Abstract;
 using Likegram.Business.Constants;
+using Likegram.Core.Aspects.Autofac.Performance;
 using Likegram.Core.Entities.Concrete;
 using Likegram.Core.Utilities.Result;
 using Likegram.DataAccess.Abstract;
@@ -31,7 +32,7 @@ namespace Likegram.Business.Concrete
             await _userDal.Delete(user);
             return new SuccessResult(BusinessMessages.SilmeBasarili);
         }
-
+        [PerformanceAspect(5)]
         public async Task<IDataResult<List<User>>> GetAll()
         {
             var result = await _userDal.GetAll();
