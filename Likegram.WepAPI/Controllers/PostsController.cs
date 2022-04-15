@@ -1,4 +1,5 @@
-﻿using Likegram.Core.Entities.Concrete;
+﻿using Likegram.Business.Abstract;
+using Likegram.Core.Entities.Concrete;
 using Likegram.Core.Utilities.Result;
 using Likegram.DataAccess.Abstract;
 using Likegram.DataAccess.Contexts;
@@ -17,17 +18,16 @@ namespace Likegram.WepAPI.Controllers
     [ApiController]
     public class PostsController : ControllerBase
     {
-        private readonly IPostDal _postDal;
+        private readonly IPostService _postService;
 
-        public PostsController(IPostDal postDal)
+        public PostsController(IPostService postService)
         {
-            _postDal = postDal;
+            _postService = postService;
         }
         [HttpGet("getbyfolloweduser")]
         public async Task<IActionResult> GetByFollowedUser(int followingUserId)
         {
-            var result = new SuccessDataResult<List<Post>>(await _postDal.GetAllByFollowedUserAsync(followingUserId));
-            return Ok(result);
+            return Ok();
         }
 
         [HttpPost("add")]

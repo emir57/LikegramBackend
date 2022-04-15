@@ -14,7 +14,7 @@ namespace Likegram.DataAccess.Concrete.EntityFramework
 {
     public class EfPostDal : EFEntityRepostioryBase<Post, LikegramDbContext>, IPostDal
     {
-        public async Task<List<Post>> GetAllByFollowedUserAsync(int followingUserId)
+        public async Task<List<Post>> GetAllByFollowedUser(int followingUserId)
         {
             using (var context = new LikegramDbContext())
             {
