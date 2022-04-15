@@ -24,46 +24,8 @@ namespace Likegram.WepAPI.Controllers
         [HttpGet("getbyfolloweduser")]
         public async Task<IActionResult> GetByFollowedUser(int followingUserId)
         {
-            var result = from followUser in _context.FollowUsers
-                         from post in _context.Posts
-                         from postComment in _context.PostComments
-                         from commentAnswer in _context.CommentAnswers
-                         from user in _context.Users
-                         where followUser.FollowingUserId == followingUserId &&
-                         post.UserId == followUser.FollowedUserId &&
-                         post.Id == postComment.PostId
-                         select new Post
-                         {
-                             Id = post.Id,
-                             User = followUser.FollowedUser,
-                             CreatedDate = post.CreatedDate,
-                             ImageUrl = post.ImageUrl,
-                             Description = post.Description,
-                             PostComments = new List<PostComment>
-                             {
-                                 new PostComment{
-                                     Comment=postComment.Comment,
-                                     Id = postComment.Id,
-                                     User = _context.Users.SingleOrDefault(x=>x.Id == postComment.UserId),
-                                     CreatedDate = postComment.CreatedDate,
-                                     CommentAnswers = new List<CommentAnswer>
-                                     {
-                                         new CommentAnswer
-                                         {
-                                             Id = commentAnswer.Id,
-                                             Answer = commentAnswer.Answer,
-                                             CreatedDate = commentAnswer.CreatedDate,
-                                             User = _context.Users.SingleOrDefault(x=>x.Id == commentAnswer.UserId)
-                                         }
-                                     }
-                                 }
-                             },
-                             PostLikes = new List<PostLike>
-                             {
-                                 _context.PostLikes.SingleOrDefault(x=>x.PostId == post.Id)
-                             }
-                         };
-            return Ok(await result.ToListAsync());
+            
+            return Ok();
         }
 
         [HttpPost("add")]
