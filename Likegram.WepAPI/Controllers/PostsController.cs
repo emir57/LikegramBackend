@@ -1,4 +1,5 @@
-﻿using Likegram.DataAccess.Contexts;
+﻿using Likegram.Core.Entities.Concrete;
+using Likegram.DataAccess.Contexts;
 using Likegram.Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -23,24 +24,46 @@ namespace Likegram.WepAPI.Controllers
         [HttpGet("getbyfolloweduser")]
         public async Task<IActionResult> GetByFollowedUser(int followingUserId)
         {
-            var result = from fu in _context.FollowUsers
-                         from p in _context.Posts
-                         where fu.FollowingUser.Id == followingUserId && p.UserId == fu.FollowedUser.Id
+            var result = from followUser in _context.FollowUsers
+                         from post in _context.Posts
+                         from postComment in _context.PostComments
+                         from commentAnswer in _context.CommentAnswers
+                         from user in _context.Users
+                         where followUser.FollowingUserId == followingUserId &&
+                         post.UserId == followUser.FollowedUserId &&
+                         post.Id == postComment.PostId
                          select new Post
                          {
-                             Id = p.Id,
-                             User = fu.FollowedUser,
-                             CreatedDate = p.CreatedDate,
-                             ImageUrl = p.ImageUrl,
-                             Description = p.Description,
-                             PostComments = _context.PostComments.Where(x => x.Post.Id == p.Id)
-                                                .Include(x=>x.CommentAnswers)
-                                                .Include(x=>x.User).ToList(),
-                             PostLikes = _context.PostLikes.Where(x => x.Post.Id == p.Id)
-                                                .Include(x=>x.Post)
-                                                .Include(x=>x.User).ToList()
+                             Id = post.Id,
+                             User = followUser.FollowedUser,
+                             CreatedDate = post.CreatedDate,
+                             ImageUrl = post.ImageUrl,
+                             Description = post.Description,
+                             PostComments = new List<PostComment>
+                             {
+                                 new PostComment{
+                                     Comment=postComment.Comment,
+                                     Id = postComment.Id,
+                                     User = _context.Users.SingleOrDefault(x=>x.Id == postComment.UserId),
+                                     CreatedDate = postComment.CreatedDate,
+                                     CommentAnswers = new List<CommentAnswer>
+                                     {
+                                         new CommentAnswer
+                                         {
+                                             Id = commentAnswer.Id,
+                                             Answer = commentAnswer.Answer,
+                                             CreatedDate = commentAnswer.CreatedDate,
+                                             User = _context.Users.SingleOrDefault(x=>x.Id == commentAnswer.UserId)
+                                         }
+                                     }
+                                 }
+                             },
+                             PostLikes = new List<PostLike>
+                             {
+                                 _context.PostLikes.SingleOrDefault(x=>x.PostId == post.Id)
+                             }
                          };
-            return Ok(result);
+            return Ok(await result.ToListAsync());
         }
 
         [HttpPost("add")]
@@ -61,7 +84,7 @@ namespace Likegram.WepAPI.Controllers
         public async Task<IActionResult> Update(int postId)
         {
             var post = await _context.Posts.SingleOrDefaultAsync(x => x.Id == postId);
-            if(post == null)
+            if (post == null)
             {
                 return BadRequest();
             }
