@@ -119,17 +119,11 @@ namespace Likegram.DataAccess.Migrations
                     b.Property<string>("Answer")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CommentId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DeletedDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<int?>("PostCommentId")
-                        .HasColumnType("int");
 
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("datetime2");
@@ -138,10 +132,6 @@ namespace Likegram.DataAccess.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PostCommentId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("CommentAnswers");
                 });
@@ -153,17 +143,13 @@ namespace Likegram.DataAccess.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<int?>("CommentId")
+                    b.Property<int>("IserId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UserId")
+                    b.Property<int>("PostCommentId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CommentId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("CommentLikes");
                 });
@@ -175,17 +161,13 @@ namespace Likegram.DataAccess.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<int?>("FollowedUserId")
+                    b.Property<int>("FollowedUserId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("FollowingUserId")
+                    b.Property<int>("FollowingUserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("FollowedUserId");
-
-                    b.HasIndex("FollowingUserId");
 
                     b.ToTable("FollowUsers");
                 });
@@ -217,8 +199,6 @@ namespace Likegram.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
-
                     b.ToTable("Posts");
                 });
 
@@ -238,20 +218,16 @@ namespace Likegram.DataAccess.Migrations
                     b.Property<DateTime>("DeletedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("PostId")
+                    b.Property<int>("PostId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("UserId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PostId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("PostComments");
                 });
@@ -263,119 +239,15 @@ namespace Likegram.DataAccess.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<int?>("PostId")
+                    b.Property<int>("PostId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UserId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PostId");
-
-                    b.HasIndex("UserId");
-
                     b.ToTable("PostLikes");
-                });
-
-            modelBuilder.Entity("Likegram.Entities.Concrete.CommentAnswer", b =>
-                {
-                    b.HasOne("Likegram.Entities.Concrete.PostComment", "PostComment")
-                        .WithMany("CommentAnswers")
-                        .HasForeignKey("PostCommentId");
-
-                    b.HasOne("Likegram.Core.Entities.Concrete.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("PostComment");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Likegram.Entities.Concrete.CommentLike", b =>
-                {
-                    b.HasOne("Likegram.Entities.Concrete.PostComment", "PostComment")
-                        .WithMany()
-                        .HasForeignKey("CommentId");
-
-                    b.HasOne("Likegram.Core.Entities.Concrete.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("PostComment");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Likegram.Entities.Concrete.FollowUser", b =>
-                {
-                    b.HasOne("Likegram.Core.Entities.Concrete.User", "FollowedUser")
-                        .WithMany()
-                        .HasForeignKey("FollowedUserId");
-
-                    b.HasOne("Likegram.Core.Entities.Concrete.User", "FollowingUser")
-                        .WithMany()
-                        .HasForeignKey("FollowingUserId");
-
-                    b.Navigation("FollowedUser");
-
-                    b.Navigation("FollowingUser");
-                });
-
-            modelBuilder.Entity("Likegram.Entities.Concrete.Post", b =>
-                {
-                    b.HasOne("Likegram.Core.Entities.Concrete.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Likegram.Entities.Concrete.PostComment", b =>
-                {
-                    b.HasOne("Likegram.Entities.Concrete.Post", "Post")
-                        .WithMany("PostComments")
-                        .HasForeignKey("PostId");
-
-                    b.HasOne("Likegram.Core.Entities.Concrete.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("Post");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Likegram.Entities.Concrete.PostLike", b =>
-                {
-                    b.HasOne("Likegram.Entities.Concrete.Post", "Post")
-                        .WithMany("PostLikes")
-                        .HasForeignKey("PostId");
-
-                    b.HasOne("Likegram.Core.Entities.Concrete.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("Post");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Likegram.Entities.Concrete.Post", b =>
-                {
-                    b.Navigation("PostComments");
-
-                    b.Navigation("PostLikes");
-                });
-
-            modelBuilder.Entity("Likegram.Entities.Concrete.PostComment", b =>
-                {
-                    b.Navigation("CommentAnswers");
                 });
 #pragma warning restore 612, 618
         }
