@@ -46,5 +46,6 @@ namespace Likegram.DataAccess.Contexts
         public DbSet<CommentAnswer> CommentAnswers { get; set; }
         public DbSet<PostLike> PostLikes { get; set; }
         public DbSet<CommentLike> CommentLikes { get; set; }
+        public DbSet<FollowUser> FollowUsers { get; set; }
     }
 }
