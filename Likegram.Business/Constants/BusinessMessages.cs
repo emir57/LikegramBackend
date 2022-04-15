@@ -23,7 +23,8 @@ namespace Likegram.Business.Constants
         public static string TokenOlusturuldu = "Token Oluşturuldu";
         public static string KullaniciAdiVeyaSifreHatali = "Kullanıcı adı veya şifre hatalı";
         public static string GirisBasirili = "Giriş Başarılı";
-        public static string KullaniciZatenMevcut = "Kullanıcı zaten mevcut";
+        public static string KullaniciEpostaZatenMevcut = "Bu eposta başka biri tarafından alınmış";
+        public static string KullaniciAdiZatenMevcut = "Bu kullanıcı adı başka biri tarafından alınmış";
         public static string KayitBasarili = "Kayıt işlemi başarılı";
     }
 }

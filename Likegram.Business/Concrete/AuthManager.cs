@@ -48,10 +48,15 @@ namespace Likegram.Business.Concrete
         public async Task<IDataResult<User>> Register(UserForRegisterDto userForRegisterDto)
         {
             byte[] passwordHash, passwordSalt;
-            var checkUser = await _userService.GetByEmail(userForRegisterDto.Email);
-            if(checkUser.Data != null)
+            var checkUserByEmail = await _userService.GetByEmail(userForRegisterDto.Email);
+            if(checkUserByEmail.Data != null)
             {
-                return new ErrorDataResult<User>(BusinessMessages.KullaniciZatenMevcut);
+                return new ErrorDataResult<User>(BusinessMessages.KullaniciEpostaZatenMevcut);
+            }
+            var checkUserByUserName = await _userService.GetByUsername(userForRegisterDto.UserName);
+            if (checkUserByEmail.Data != null)
+            {
+                return new ErrorDataResult<User>(BusinessMessages.KullaniciAdiZatenMevcut);
             }
             HashingHelper.CreatePasswordHash(out passwordHash, out passwordSalt, userForRegisterDto.Password);
             var user = new FluentUser()
