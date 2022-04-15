@@ -1,4 +1,5 @@
 ﻿using Likegram.Core.Entities.Concrete;
+using Likegram.DataAccess.Abstract;
 using Likegram.DataAccess.Contexts;
 using Likegram.Entities.Concrete;
 using Microsoft.AspNetCore.Http;
@@ -15,42 +16,34 @@ namespace Likegram.WepAPI.Controllers
     [ApiController]
     public class PostsController : ControllerBase
     {
-        private readonly LikegramDbContext _context;
+        private readonly IPostDal _postDal;
 
-        public PostsController(LikegramDbContext context)
+        public PostsController(IPostDal postDal)
         {
-            _context = context;
+            _postDal = postDal;
         }
         [HttpGet("getbyfolloweduser")]
         public async Task<IActionResult> GetByFollowedUser(int followingUserId)
         {
-            
-            return Ok();
+            return Ok(_postDal.GetAllByFollowedUserAsync(followingUserId));
         }
 
         [HttpPost("add")]
         public async Task<IActionResult> Add(Post post)
         {
-            await _context.Posts.AddAsync(post);
-            await _context.SaveChangesAsync();
+
             return Ok();
         }
         [HttpPost("update")]
         public async Task<IActionResult> Update(Post post)
         {
-            _context.Posts.Update(post);
-            await _context.SaveChangesAsync();
+
             return Ok();
         }
         [HttpPost("delete")]
         public async Task<IActionResult> Update(int postId)
         {
-            var post = await _context.Posts.SingleOrDefaultAsync(x => x.Id == postId);
-            if (post == null)
-            {
-                return BadRequest();
-            }
-            _context.Posts.Remove(post);
+
             return Ok();
         }
     }
