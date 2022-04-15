@@ -54,7 +54,7 @@ namespace Likegram.Business.Concrete
                 return new ErrorDataResult<User>(BusinessMessages.KullaniciEpostaZatenMevcut);
             }
             var checkUserByUserName = await _userService.GetByUsername(userForRegisterDto.UserName);
-            if (checkUserByEmail.Data != null)
+            if (checkUserByUserName.Data != null)
             {
                 return new ErrorDataResult<User>(BusinessMessages.KullaniciAdiZatenMevcut);
             }
