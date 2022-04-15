@@ -10,7 +10,6 @@ namespace Likegram.Entities.Concrete
 {
     public class CommentAnswer : BaseEntity
     {
-        public int CommentId { get; set; }
         public PostComment PostComment { get; set; }
         public int UserId { get; set; }
         public User User { get; set; }

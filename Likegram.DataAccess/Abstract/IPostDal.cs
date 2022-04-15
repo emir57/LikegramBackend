@@ -10,5 +10,6 @@ namespace Likegram.DataAccess.Abstract
 {
     public interface IPostDal : IEntityRepository<Post>
     {
+        List<Post> GetAllByFollowedUser(int followingUserId);
     }
 }
