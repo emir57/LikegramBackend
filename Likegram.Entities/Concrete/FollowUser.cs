@@ -11,11 +11,12 @@ namespace Likegram.Entities.Concrete
     public class FollowUser
     {
         public int Id { get; set; }
-        [ForeignKey("FollowingUserId")]
         //Takip Eden
-        public User FollowingUserId { get; set; }
-        [ForeignKey("FollowedUserId")]
+        [ForeignKey("FollowingUserId")]
+        public User FollowingUser { get; set; }
+
         //Takip Edilen
-        public User FollowedUserId { get; set; }
+        [ForeignKey("FollowedUserId")]
+        public User FollowedUser { get; set; }
     }
 }
