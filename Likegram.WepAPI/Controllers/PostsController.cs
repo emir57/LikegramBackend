@@ -1,4 +1,5 @@
 ﻿using Likegram.Core.Entities.Concrete;
+using Likegram.Core.Utilities.Result;
 using Likegram.DataAccess.Abstract;
 using Likegram.DataAccess.Contexts;
 using Likegram.Entities.Concrete;
@@ -25,7 +26,8 @@ namespace Likegram.WepAPI.Controllers
         [HttpGet("getbyfolloweduser")]
         public async Task<IActionResult> GetByFollowedUser(int followingUserId)
         {
-            return Ok(await _postDal.GetAllByFollowedUserAsync(followingUserId));
+            var result = new SuccessDataResult<List<Post>>(await _postDal.GetAllByFollowedUserAsync(followingUserId));
+            return Ok(result);
         }
 
         [HttpPost("add")]
