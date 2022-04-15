@@ -13,11 +13,13 @@ namespace Likegram.Entities.Concrete
     public class CommentLike
     {
         public int Id { get; set; }
-        
-        [ForeignKey("UserId")]
+
+        [NotMapped]
         public User User { get; set; }
-        
-        [ForeignKey("CommentId")]
+        public int IserId { get; set; }
+
+        [NotMapped]
         public PostComment PostComment { get; set; }
+        public int PostCommentId { get; set; }
     }
 }
