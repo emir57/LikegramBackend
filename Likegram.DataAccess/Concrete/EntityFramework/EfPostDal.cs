@@ -18,18 +18,19 @@ namespace Likegram.DataAccess.Concrete.EntityFramework
         {
             using(var context = new LikegramDbContext())
             {
-                var posts = from fu in context.FollowUsers
+                var result = from fu in context.FollowUsers
                              from p in context.Posts
                             where fu.FollowingUserId == followingUserId && p.UserId == fu.FollowedUserId
                             select new Post
                              {
                                  Id = p.Id,
-                                 User = fu.FollowedUser,
+                                 UserId = p.UserId,
                                  CreatedDate = p.CreatedDate,
                                  ImageUrl = p.ImageUrl,
                                  Description = p.Description,
                              };
-                foreach (var post in posts)
+                var posts = new List<Post>();
+                foreach (var post in result.ToList())
                 {
                     var comments = await context.PostComments.Where(x => x.PostId == post.Id).ToListAsync();
                     foreach (var comment in comments)
@@ -44,8 +45,9 @@ namespace Likegram.DataAccess.Concrete.EntityFramework
                     post.User = await context.Users.SingleOrDefaultAsync(x => x.Id == post.UserId);
                     post.PostLikes = await context.PostLikes.Where(x => x.PostId == post.Id).ToListAsync();
                     post.PostComments = comments;
+                    posts.Add(post);
                 }
-                return posts.ToList();
+                return posts;
             }
         }
     }
