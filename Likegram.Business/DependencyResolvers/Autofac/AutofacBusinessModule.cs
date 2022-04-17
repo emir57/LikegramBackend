@@ -19,7 +19,7 @@ namespace Likegram.Business.DependencyResolvers.Autofac
     {
         protected override void Load(ContainerBuilder builder)
         {
-            
+
             #region DataAccess Registers
             builder.RegisterType<EfCommentAnswerDal>().As<ICommentAnswerDal>().SingleInstance();
             //builder.RegisterType<EfCommentLikeDal>().As<ICommentLikeDal>().SingleInstance();
@@ -33,6 +33,7 @@ namespace Likegram.Business.DependencyResolvers.Autofac
             #region Business Registers
             builder.RegisterType<AuthManager>().As<IAuthService>().SingleInstance();
             builder.RegisterType<UserManager>().As<IUserService>().SingleInstance();
+            builder.RegisterType<PostCommentManager>().As<IPostCommentService>().SingleInstance();
 
             #endregion
 
