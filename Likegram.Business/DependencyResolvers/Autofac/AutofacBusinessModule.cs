@@ -12,6 +12,7 @@ using Autofac.Extras.DynamicProxy;
 using Likegram.Core.Utilities.Interceptors;
 using Likegram.DataAccess.Concrete.EntityFramework;
 using Likegram.DataAccess.Abstract;
+using Likegram.Core.Utilities.Email;
 
 namespace Likegram.Business.DependencyResolvers.Autofac
 {
@@ -38,6 +39,7 @@ namespace Likegram.Business.DependencyResolvers.Autofac
             #endregion
 
             builder.RegisterType<HttpContextAccessor>().As<IHttpContextAccessor>().SingleInstance();
+            builder.RegisterType<SmtpEmailSender>().As<IEmailService>().SingleInstance();
             builder.RegisterType<JwtHelper>().As<ITokenHelper>().SingleInstance();
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();

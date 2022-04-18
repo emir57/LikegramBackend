@@ -16,6 +16,8 @@ namespace Likegram.Core.Entities.Concrete
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
         public string ProfilePhoto { get; set; }
+        public bool EmailConfirm { get; set; }
+        public string ConfirmKey { get; set; }
 
     }
 }
