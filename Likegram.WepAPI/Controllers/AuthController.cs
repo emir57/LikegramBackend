@@ -40,6 +40,9 @@ namespace Likegram.WepAPI.Controllers
                 //TODO: send email
                 var rndm = new Random();
                 int number = rndm.Next(100, 999);
+                var user = result.Data;
+                user.ConfirmKey = number.ToString();
+                await _userService.Update(user);
                 string body = $"Eposta adresinizi doğrulamak için anahtarınız.\n {number}";
                 await _emailService.SendMailAsync(result.Data.Email, "Email Doğrulama", body);
                 return BadRequest(emailErrorResult);
