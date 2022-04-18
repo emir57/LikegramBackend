@@ -39,7 +39,7 @@ namespace Likegram.WepAPI.Controllers
                 var emailErrorResult = new ErrorDataResult<User>("Lütfen eposta adresinizi onaylayınız");
                 //TODO: send email
                 var rndm = new Random();
-                int number = rndm.Next(100, 999);
+                int number = rndm.Next(1000, 9999);
                 var user = result.Data;
                 user.ConfirmKey = number.ToString();
                 await _userService.Update(user);
@@ -70,14 +70,14 @@ namespace Likegram.WepAPI.Controllers
             }
             return Ok(result);
         }
-        [HttpGet("emailconfirm"]
+        [HttpGet("emailconfirm")]
         public async Task<IActionResult> EmailConfirm(int userId, string confirmKey)
         {
             var userResult = await _userService.GetById(userId);
             if (confirmKey == userResult.Data.ConfirmKey)
             {
                 var successResult = new SuccessResult("Doğrulama başarılı");
-                return Ok(successResult)
+                return Ok(successResult);
             }
             var errorREsult = new ErrorResult("Doğrulama başarısız");
             return BadRequest(errorREsult);
