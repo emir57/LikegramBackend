@@ -71,11 +71,14 @@ namespace Likegram.WepAPI.Controllers
             return Ok(result);
         }
         [HttpGet("emailconfirm")]
-        public async Task<IActionResult> EmailConfirm(int userId, string confirmKey)
+        public async Task<IActionResult> EmailConfirm(string userEmail, string confirmKey)
         {
-            var userResult = await _userService.GetById(userId);
+            var userResult = await _userService.GetByEmail(userEmail);
             if (confirmKey == userResult.Data.ConfirmKey)
             {
+                var user = userResult.Data;
+                user.EmailConfirm = true;
+                await _userService.Update(user);
                 var successResult = new SuccessResult("Doğrulama başarılı");
                 return Ok(successResult);
             }
