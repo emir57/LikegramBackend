@@ -1,8 +1,10 @@
 using Likegram.Core.DependencyResolvers;
 using Likegram.Core.Extensions;
+using Likegram.Core.Utilities.IoC;
 using Likegram.Core.Utilities.Security.Encryption;
 using Likegram.Core.Utilities.Security.JWT;
 using Likegram.DataAccess.Contexts;
+using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -43,7 +45,7 @@ namespace Likegram.WepAPI
                 {
                     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
                 });
-
+            services.AddMediatR(typeof(ServiceTool));
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Likegram.WepAPI", Version = "v1" });
