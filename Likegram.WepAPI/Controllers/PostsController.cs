@@ -36,14 +36,14 @@ namespace Likegram.WepAPI.Controllers
 
             return Ok();
         }
-        [HttpPost("update")]
+        [HttpPut("update")]
         public async Task<IActionResult> Update(Post post)
         {
 
             return Ok();
         }
-        [HttpPost("delete")]
-        public async Task<IActionResult> Update(int postId)
+        [HttpDelete("delete")]
+        public async Task<IActionResult> Delete(int postId)
         {
 
             return Ok();
