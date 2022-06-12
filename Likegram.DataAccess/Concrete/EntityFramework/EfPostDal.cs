@@ -29,26 +29,26 @@ namespace Likegram.DataAccess.Concrete.EntityFramework
                                  ImageUrl = p.ImageUrl,
                                  Description = p.Description,
                              };
-                result = result.AsNoTracking();
-                var posts = new List<Post>();
-                foreach (var post in result.ToList())
-                {
-                    var comments = await context.PostComments.AsNoTracking().Where(x => x.PostId == post.Id).ToListAsync();
-                    foreach (var comment in comments)
-                    {
-                        comment.User = await context.Users.AsNoTracking().SingleOrDefaultAsync(x => x.Id == comment.UserId);
-                        comment.CommentAnswers = await context.CommentAnswers.AsNoTracking().Where(x => x.PostCommentId == comment.Id).ToListAsync();
-                        foreach (var answer in comment.CommentAnswers)
-                        {
-                            answer.User = await context.Users.AsNoTracking().SingleOrDefaultAsync(x => x.Id == answer.UserId);
-                        }
-                    }
-                    post.User = await context.Users.AsNoTracking().SingleOrDefaultAsync(x => x.Id == post.UserId);
-                    post.PostLikes = await context.PostLikes.AsNoTracking().Where(x => x.PostId == post.Id).ToListAsync();
-                    post.PostComments = comments;
-                    posts.Add(post);
-                }
-                return posts;
+                //result = result.AsNoTracking();
+                //var posts = new List<Post>();
+                //foreach (var post in result.ToList())
+                //{
+                //    var comments = await context.PostComments.AsNoTracking().Where(x => x.PostId == post.Id).ToListAsync();
+                //    foreach (var comment in comments)
+                //    {
+                //        comment.User = await context.Users.AsNoTracking().SingleOrDefaultAsync(x => x.Id == comment.UserId);
+                //        comment.CommentAnswers = await context.CommentAnswers.AsNoTracking().Where(x => x.PostCommentId == comment.Id).ToListAsync();
+                //        foreach (var answer in comment.CommentAnswers)
+                //        {
+                //            answer.User = await context.Users.AsNoTracking().SingleOrDefaultAsync(x => x.Id == answer.UserId);
+                //        }
+                //    }
+                //    post.User = await context.Users.AsNoTracking().SingleOrDefaultAsync(x => x.Id == post.UserId);
+                //    post.PostLikes = await context.PostLikes.AsNoTracking().Where(x => x.PostId == post.Id).ToListAsync();
+                //    post.PostComments = comments;
+                //    posts.Add(post);
+                //}
+                return await context.Posts.Include(x=>x.User).ToListAsync();
             }
         }
     }

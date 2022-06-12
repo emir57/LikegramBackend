@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,7 +18,7 @@ namespace Likegram.Core.Entities.Concrete
         public byte[] PasswordSalt { get; set; }
         public string ProfilePhoto { get; set; }
         public bool EmailConfirm { get; set; }
-        public string ConfirmKey { get; set; }
+        public string ConfirmCode { get; set; }
 
     }
 }

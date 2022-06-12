@@ -41,7 +41,7 @@ namespace Likegram.WepAPI.Controllers
                 var rndm = new Random();
                 int number = rndm.Next(1000, 9999);
                 var user = result.Data;
-                user.ConfirmKey = number.ToString();
+                user.ConfirmCode = number.ToString();
                 await _userService.Update(user);
                 string body = $"Eposta adresinizi doğrulamak için anahtarınız.\n {number}";
                 await _emailService.SendMailAsync(result.Data.Email, "Email Doğrulama", body);
@@ -74,7 +74,7 @@ namespace Likegram.WepAPI.Controllers
         public async Task<IActionResult> EmailConfirm(string userEmail, string confirmKey)
         {
             var userResult = await _userService.GetByEmail(userEmail);
-            if (confirmKey == userResult.Data.ConfirmKey)
+            if (confirmKey == userResult.Data.ConfirmCode)
             {
                 var user = userResult.Data;
                 user.EmailConfirm = true;

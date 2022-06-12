@@ -13,12 +13,10 @@ namespace Likegram.Entities.Concrete
         public int Id { get; set; }
         public int FollowingUserId { get; set; }
         //Takip Eden
-        [NotMapped]
         public User FollowingUser { get; set; }
 
         public int FollowedUserId { get; set; }
         //Takip Edilen
-        [NotMapped]
         public User FollowedUser { get; set; }
     }
 }

@@ -14,11 +14,9 @@ namespace Likegram.Entities.Concrete
     {
         public int Id { get; set; }
 
-        [NotMapped]
         public User User { get; set; }
-        public int IserId { get; set; }
+        public int UserId { get; set; }
 
-        [NotMapped]
         public PostComment PostComment { get; set; }
         public int PostCommentId { get; set; }
     }

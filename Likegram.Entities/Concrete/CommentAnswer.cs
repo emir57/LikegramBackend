@@ -12,10 +12,8 @@ namespace Likegram.Entities.Concrete
     public class CommentAnswer : BaseEntity
     {
         public int PostCommentId { get; set; }
-        [NotMapped]
         public PostComment PostComment { get; set; }
         public int UserId { get; set; }
-        [NotMapped]
         public User User { get; set; }
         public string Answer { get; set; }
     }
