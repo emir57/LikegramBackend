@@ -48,7 +48,13 @@ namespace Likegram.DataAccess.Concrete.EntityFramework
                 //    post.PostComments = comments;
                 //    posts.Add(post);
                 //}
-                return await context.Posts.Include(x=>x.User).ToListAsync();
+                return await context.Posts
+                    .Include(x=>x.User)
+                    .Include(x=>x.PostLikes)
+                    .ThenInclude(x=>x.User)
+                    .Include(x=>x.PostComments)
+                    .ThenInclude(x=>x.User)
+                    .ToListAsync();
             }
         }
     }
