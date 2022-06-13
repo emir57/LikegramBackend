@@ -28,9 +28,12 @@ namespace Likegram.Business.Concrete
                 new ErrorResult(BusinessMessages.EklemeBasarisiz);
         }
 
-        public Task<IResult> DeleteAsync(PostLike postLike)
+        public async Task<IResult> DeleteAsync(PostLike postLike)
         {
-
+            bool result = await _postLikeDal.Delete(postLike);
+            return result ?
+                new SuccessResult(BusinessMessages.SilmeBasarili) :
+                new ErrorResult(BusinessMessages.SilmeBasarisiz);
         }
     }
 }
