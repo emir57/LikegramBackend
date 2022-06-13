@@ -7,5 +7,10 @@ namespace Likegram.WepAPI.Controllers
     [ApiController]
     public class PostLikesController : ControllerBase
     {
+        private readonly IPostLikesService _postLikesService;
+        public PostLikesController(IPostLikesService postLikesService)
+        {
+            _postLikesService = postLikesService;
+        }
     }
 }
