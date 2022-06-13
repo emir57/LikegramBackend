@@ -43,5 +43,13 @@ namespace Likegram.Business.Concrete
                 new ErrorDataResult<PostLike>(BusinessMessages.NotFound) :
                 new SuccessDataResult<PostLike>(postLike, BusinessMessages.UnSuccessfulList);
         }
+
+        public async Task<IDataResult<PostLike>> GetByUserIdAndPostId(int userId, int postId)
+        {
+            var postLike = await _postLikeDal.Get(x => x.UserId == userId && x.PostId == postId);
+            return postLike == null ?
+                new ErrorDataResult<PostLike>(BusinessMessages.NotFound) :
+                new SuccessDataResult<PostLike>(postLike, BusinessMessages.UnSuccessfulList);
+        }
     }
 }
