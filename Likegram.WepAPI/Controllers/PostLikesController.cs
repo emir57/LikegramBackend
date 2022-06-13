@@ -32,7 +32,7 @@ namespace Likegram.WepAPI.Controllers
             return Ok(result3);
         }
         [HttpGet("checklike")]
-        public async Task<IActionResult> CheckLike(CheckLikeViewModel checkLikeViewModel)
+        public async Task<IActionResult> CheckLike([FromQuery]CheckLikeViewModel checkLikeViewModel)
         {
             var result = await _postLikesService.CheckLike(checkLikeViewModel.UserId, checkLikeViewModel.PostId);
             return Ok(result);
