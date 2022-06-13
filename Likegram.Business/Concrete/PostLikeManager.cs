@@ -35,5 +35,13 @@ namespace Likegram.Business.Concrete
                 new SuccessResult(BusinessMessages.SilmeBasarili) :
                 new ErrorResult(BusinessMessages.SilmeBasarisiz);
         }
+
+        public async Task<IDataResult<PostLike>> GetByIdAsync(int id)
+        {
+            var postLike = await _postLikeDal.Get(x => x.Id == id);
+            return postLike == null ?
+                new ErrorResult(BusinessMessages.NotFound) :
+                new SuccessResult(BusinessMessages.GetirmeBasarili);
+        }
     }
 }
