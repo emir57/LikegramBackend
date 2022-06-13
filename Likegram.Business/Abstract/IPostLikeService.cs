@@ -12,5 +12,6 @@ namespace Likegram.Business.Abstract
     {
         Task<IResult> AddAsync(PostLike postLike);
         Task<IResult> DeleteAsync(PostLike postLike);
+        Task<IDataResult<PostLike>> GetByIdAsync(int id);
     }
 }
