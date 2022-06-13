@@ -28,6 +28,14 @@ namespace Likegram.Business.Concrete
                 new ErrorResult(BusinessMessages.UnSuccessfulAdd);
         }
 
+        public async Task<IResult> CheckLike(int userId, int postId)
+        {
+            var postLike = await _postLikeDal.Get(x => x.UserId == userId && x.PostId == postId);
+            return postLike == null ?
+                new ErrorResult() :
+                new SuccessResult();
+        }
+
         public async Task<IResult> DeleteAsync(PostLike postLike)
         {
             bool result = await _postLikeDal.Delete(postLike);
