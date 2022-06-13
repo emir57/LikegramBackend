@@ -31,11 +31,12 @@ namespace Likegram.Business.DependencyResolvers.Autofac
             builder.RegisterType<EfUserDal>().As<IUserDal>().SingleInstance();
             builder.RegisterType<EfUserRoleDal>().As<IUserRoleDal>().SingleInstance();
             #endregion
+
             #region Business Registers
             builder.RegisterType<AuthManager>().As<IAuthService>().SingleInstance();
             builder.RegisterType<UserManager>().As<IUserService>().SingleInstance();
             builder.RegisterType<PostCommentManager>().As<IPostCommentService>().SingleInstance();
-
+            builder.RegisterType<PostLikeManager>().As<IPostLikeService>().SingleInstance();
             #endregion
 
             builder.RegisterType<HttpContextAccessor>().As<IHttpContextAccessor>().SingleInstance();
