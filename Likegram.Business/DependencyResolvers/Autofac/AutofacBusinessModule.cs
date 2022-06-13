@@ -30,6 +30,7 @@ namespace Likegram.Business.DependencyResolvers.Autofac
             builder.RegisterType<EfRoleDal>().As<IRoleDal>().SingleInstance();
             builder.RegisterType<EfUserDal>().As<IUserDal>().SingleInstance();
             builder.RegisterType<EfUserRoleDal>().As<IUserRoleDal>().SingleInstance();
+            builder.RegisterType<EfPostLikeDal>().As<IPostLikeDal>().SingleInstance();
             #endregion
 
             #region Business Registers
