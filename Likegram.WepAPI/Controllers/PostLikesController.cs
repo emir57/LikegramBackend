@@ -18,7 +18,18 @@ namespace Likegram.WepAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> LikeOrUnLike(LikeOrUnlikeViewModel likeOrUnlikeViewModel)
         {
-            return Ok();
+            var result = await _postLikesService.GetByUserIdAndPostId(likeOrUnlikeViewModel.UserId, likeOrUnlikeViewModel.PostId);
+            if (result.Success)
+            {
+                var result2 = await _postLikesService.DeleteAsync(result.Data);
+                return Ok(result2);
+            }
+            var result3 = await _postLikesService.AddAsync(new Entities.Concrete.PostLike
+            {
+                PostId = likeOrUnlikeViewModel.PostId,
+                UserId = likeOrUnlikeViewModel.UserId
+            });
+            return Ok(result3);
         }
     }
 }
