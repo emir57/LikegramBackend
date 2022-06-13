@@ -28,7 +28,7 @@ namespace Likegram.Business.Concrete
         {
             var roles = _userService.UserRoles(user);
             var token = _tokenHelper.CreateToken(user, roles.Data);
-            return new SuccessDataResult<AccessToken>(token, BusinessMessages.TokenOlusturuldu);
+            return new SuccessDataResult<AccessToken>(token, BusinessMessages.CreateToken);
         }
 
         public async Task<IDataResult<User>> Login(UserForLoginDto userForLoginDto)
@@ -36,13 +36,13 @@ namespace Likegram.Business.Concrete
             var user = await _userService.GetByEmail(userForLoginDto.Email);
             if(user.Data == null)
             {
-                return new ErrorDataResult<User>(user.Data, BusinessMessages.KullaniciAdiVeyaSifreHatali);
+                return new ErrorDataResult<User>(user.Data, BusinessMessages.UserNameOrPasswordWrong);
             }
             if (!HashingHelper.VerifyPasswordHash(user.Data.PasswordHash, user.Data.PasswordSalt, userForLoginDto.Password))
             {
-                return new ErrorDataResult<User>(BusinessMessages.KullaniciAdiVeyaSifreHatali);
+                return new ErrorDataResult<User>(BusinessMessages.UserNameOrPasswordWrong);
             }
-            return new SuccessDataResult<User>(user.Data, BusinessMessages.GirisBasirili);
+            return new SuccessDataResult<User>(user.Data, BusinessMessages.SuccessfulLogin);
         }
 
         public async Task<IDataResult<User>> Register(UserForRegisterDto userForRegisterDto)
@@ -51,12 +51,12 @@ namespace Likegram.Business.Concrete
             var checkUserByEmail = await _userService.GetByEmail(userForRegisterDto.Email);
             if(checkUserByEmail.Data != null)
             {
-                return new ErrorDataResult<User>(BusinessMessages.KullaniciEpostaZatenMevcut);
+                return new ErrorDataResult<User>(BusinessMessages.UserEmailAlreadyExists);
             }
             var checkUserByUserName = await _userService.GetByUsername(userForRegisterDto.UserName);
             if (checkUserByUserName.Data != null)
             {
-                return new ErrorDataResult<User>(BusinessMessages.KullaniciAdiZatenMevcut);
+                return new ErrorDataResult<User>(BusinessMessages.UserUserNameAlreadyExists);
             }
             HashingHelper.CreatePasswordHash(out passwordHash, out passwordSalt, userForRegisterDto.Password);
             var user = new FluentUser()
@@ -66,7 +66,7 @@ namespace Likegram.Business.Concrete
                 .SetPasswordSalt(passwordSalt)
                 .GetUser();
             await _userService.Add(user);
-            return new SuccessDataResult<User>(user, BusinessMessages.KayitBasarili);
+            return new SuccessDataResult<User>(user, BusinessMessages.SuccessfulRegister);
         }
     }
 }

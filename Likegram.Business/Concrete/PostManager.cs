@@ -23,31 +23,31 @@ namespace Likegram.Business.Concrete
         public async Task<IResult> Add(Post post)
         {
             await _postDal.Add(post);
-            return new SuccessResult(BusinessMessages.EklemeBasarili);
+            return new SuccessResult(BusinessMessages.SuccessAdd);
         }
 
         public async Task<IResult> Delete(Post post)
         {
             await _postDal.Delete(post);
-            return new SuccessResult(BusinessMessages.SilmeBasarili);
+            return new SuccessResult(BusinessMessages.SuccessDelete);
         }
 
         public async Task<IDataResult<List<Post>>> GetAll()
         {
             var result = await _postDal.GetAll();
-            return new SuccessDataResult<List<Post>>(result, BusinessMessages.ListelemeBasarili);
+            return new SuccessDataResult<List<Post>>(result, BusinessMessages.SuccessList);
         }
 
         public async Task<IDataResult<List<Post>>> GetAllByFollowedUser(int followingUserId)
         {
             var result = await _postDal.GetAllByFollowedUser(followingUserId);
-            return new SuccessDataResult<List<Post>>(result, BusinessMessages.ListelemeBasarili);
+            return new SuccessDataResult<List<Post>>(result, BusinessMessages.SuccessList);
         }
 
         public async Task<IResult> Update(Post post)
         {
             await _postDal.Update(post);
-            return new SuccessResult(BusinessMessages.GuncellemeBasarili);
+            return new SuccessResult(BusinessMessages.SuccessUpdate);
         }
     }
 }

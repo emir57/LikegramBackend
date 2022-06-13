@@ -24,16 +24,16 @@ namespace Likegram.Business.Concrete
         {
             bool result = await _postLikeDal.Add(postLike);
             return result ?
-                new SuccessResult(BusinessMessages.EklemeBasarili) :
-                new ErrorResult(BusinessMessages.EklemeBasarisiz);
+                new SuccessResult(BusinessMessages.SuccessAdd) :
+                new ErrorResult(BusinessMessages.UnSuccessfulAdd);
         }
 
         public async Task<IResult> DeleteAsync(PostLike postLike)
         {
             bool result = await _postLikeDal.Delete(postLike);
             return result ?
-                new SuccessResult(BusinessMessages.SilmeBasarili) :
-                new ErrorResult(BusinessMessages.SilmeBasarisiz);
+                new SuccessResult(BusinessMessages.SuccessDelete) :
+                new ErrorResult(BusinessMessages.UnSuccessfulDelete);
         }
 
         public async Task<IDataResult<PostLike>> GetByIdAsync(int id)
@@ -41,7 +41,7 @@ namespace Likegram.Business.Concrete
             var postLike = await _postLikeDal.Get(x => x.Id == id);
             return postLike == null ?
                 new ErrorResult(BusinessMessages.NotFound) :
-                new SuccessResult(BusinessMessages.GetirmeBasarili);
+                new SuccessResult(BusinessMessages.UnSuccessfulList);
         }
     }
 }
