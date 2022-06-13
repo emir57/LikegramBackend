@@ -1,6 +1,8 @@
 ﻿using Likegram.Business.Abstract;
+using Likegram.WepAPI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace Likegram.WepAPI.Controllers
 {
@@ -12,6 +14,11 @@ namespace Likegram.WepAPI.Controllers
         public PostLikesController(IPostLikeService postLikesService)
         {
             _postLikesService = postLikesService;
+        }
+        [HttpPost]
+        public async Task<IActionResult> LikeOrUnLike(LikeOrUnlikeViewModel likeOrUnlikeViewModel)
+        {
+            return Ok();
         }
     }
 }
