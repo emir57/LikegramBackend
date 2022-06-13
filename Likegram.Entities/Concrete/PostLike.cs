@@ -10,10 +10,8 @@ using System.Threading.Tasks;
 
 namespace Likegram.Entities.Concrete
 {
-    public class PostLike
+    public class PostLike : BaseEntity
     {
-        public int Id { get; set; }
-
         public User User { get; set; }
         public int UserId { get; set; }
 
