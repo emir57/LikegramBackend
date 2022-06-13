@@ -40,8 +40,8 @@ namespace Likegram.Business.Concrete
         {
             var postLike = await _postLikeDal.Get(x => x.Id == id);
             return postLike == null ?
-                new ErrorResult(BusinessMessages.NotFound) :
-                new SuccessResult(BusinessMessages.UnSuccessfulList);
+                new ErrorDataResult<PostLike>(BusinessMessages.NotFound) :
+                new SuccessDataResult<PostLike>(postLike, BusinessMessages.UnSuccessfulList);
         }
     }
 }
