@@ -26,5 +26,7 @@ namespace Likegram.Business.Constants
         public static string KullaniciEpostaZatenMevcut = "Bu eposta başka biri tarafından alınmış";
         public static string KullaniciAdiZatenMevcut = "Bu kullanıcı adı başka biri tarafından alınmış";
         public static string KayitBasarili = "Kayıt işlemi başarılı";
+
+        public static string NotFound = "Kayıt bulunamadı";
     }
 }
