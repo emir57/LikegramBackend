@@ -1,4 +1,5 @@
 ﻿using Likegram.Business.Abstract;
+using Likegram.Business.Constants;
 using Likegram.Core.Utilities.Result;
 using Likegram.DataAccess.Abstract;
 using Likegram.Entities.Concrete;
@@ -21,13 +22,15 @@ namespace Likegram.Business.Concrete
 
         public async Task<IResult> AddAsync(PostLike postLike)
         {
-            await _postLikeDal.Add(postLike);
-            return new SuccessResult() 
+            bool result = await _postLikeDal.Add(postLike);
+            return result ?
+                new SuccessResult(BusinessMessages.EklemeBasarili) :
+                new ErrorResult(BusinessMessages.EklemeBasarisiz);
         }
 
         public Task<IResult> DeleteAsync(PostLike postLike)
         {
-            
+
         }
     }
 }
