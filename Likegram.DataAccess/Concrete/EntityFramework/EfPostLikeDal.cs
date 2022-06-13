@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Likegram.DataAccess.Concrete.EntityFramework
 {
-    public class EfPostLikeDal
+    public class EfPostLikeDal : EFEntityRepostioryBase<PostLike, LikegramDbContext>, IPostLikeDal
     {
     }
 }
