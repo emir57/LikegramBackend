@@ -19,8 +19,8 @@ namespace Likegram.Core.DataAccess.Entityframework
             using (var context = new TContext())
             {
                 context.Entry(entity).State = EntityState.Added;
-                await context.SaveChangesAsync();
-                return true;
+                int a = await context.SaveChangesAsync();
+                return a == 1 ? true : false;
             }
         }
 
@@ -29,8 +29,8 @@ namespace Likegram.Core.DataAccess.Entityframework
             using (var context = new TContext())
             {
                 context.Entry(entity).State = EntityState.Deleted;
-                await context.SaveChangesAsync();
-                return true;
+                int a = await context.SaveChangesAsync();
+                return a == 1 ? true : false;
             }
         }
 
@@ -60,11 +60,11 @@ namespace Likegram.Core.DataAccess.Entityframework
 
         public async Task<bool> Update(TEntity entity)
         {
-            using(var context = new TContext())
+            using (var context = new TContext())
             {
                 context.Entry(entity).State = EntityState.Modified;
-                await context.SaveChangesAsync();
-                return true;
+                int a = await context.SaveChangesAsync();
+                return a == 1 ? true : false;
             }
         }
     }

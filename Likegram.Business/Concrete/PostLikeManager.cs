@@ -19,9 +19,10 @@ namespace Likegram.Business.Concrete
             _postLikeDal = postLikeDal;
         }
 
-        public Task<IResult> AddAsync(PostLike postLike)
+        public async Task<IResult> AddAsync(PostLike postLike)
         {
-            
+            await _postLikeDal.Add(postLike);
+            return new SuccessResult() 
         }
 
         public Task<IResult> DeleteAsync(PostLike postLike)
