@@ -34,7 +34,8 @@ namespace Likegram.WepAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> CheckLike(CheckLikeViewModel checkLikeViewModel)
         {
-
+            var result = await _postLikesService.CheckLike(checkLikeViewModel.UserId, checkLikeViewModel.PostId);
+            return Ok(result);
         }
     }
 }
