@@ -31,5 +31,10 @@ namespace Likegram.WepAPI.Controllers
             });
             return Ok(result3);
         }
+        [HttpGet]
+        public async Task<IActionResult> CheckLike(CheckLikeViewModel checkLikeViewModel)
+        {
+
+        }
     }
 }
