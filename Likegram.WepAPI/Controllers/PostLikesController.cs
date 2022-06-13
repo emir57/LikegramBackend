@@ -15,7 +15,7 @@ namespace Likegram.WepAPI.Controllers
         {
             _postLikesService = postLikesService;
         }
-        [HttpPost]
+        [HttpPost("likeorunlike")]
         public async Task<IActionResult> LikeOrUnLike(LikeOrUnlikeViewModel likeOrUnlikeViewModel)
         {
             var result = await _postLikesService.GetByUserIdAndPostId(likeOrUnlikeViewModel.UserId, likeOrUnlikeViewModel.PostId);
@@ -31,7 +31,7 @@ namespace Likegram.WepAPI.Controllers
             });
             return Ok(result3);
         }
-        [HttpGet]
+        [HttpGet("checklike")]
         public async Task<IActionResult> CheckLike(CheckLikeViewModel checkLikeViewModel)
         {
             var result = await _postLikesService.CheckLike(checkLikeViewModel.UserId, checkLikeViewModel.PostId);
