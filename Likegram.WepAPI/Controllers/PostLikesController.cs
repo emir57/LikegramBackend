@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Likegram.Business.Abstract;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Likegram.WepAPI.Controllers
@@ -7,8 +8,8 @@ namespace Likegram.WepAPI.Controllers
     [ApiController]
     public class PostLikesController : ControllerBase
     {
-        private readonly IPostLikesService _postLikesService;
-        public PostLikesController(IPostLikesService postLikesService)
+        private readonly IPostLikeService _postLikesService;
+        public PostLikesController(IPostLikeService postLikesService)
         {
             _postLikesService = postLikesService;
         }
