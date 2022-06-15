@@ -22,7 +22,10 @@ namespace Likegram.WepAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> GetComments(int postId)
         {
-            var result = _postCommentService
+            var result = await _postCommentService.GetListByPostIdAsync(postId);
+            if (!result.Success)
+                return BadRequest(result);
+            return Ok(result);
         }
 
         [HttpPost("add")]
