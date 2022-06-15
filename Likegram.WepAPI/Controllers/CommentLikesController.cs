@@ -34,7 +34,7 @@ namespace Likegram.WepAPI.Controllers
         }
 
         [HttpGet("checklike")]
-        public async Task<IActionResult> CheckLike(CommentCheckLikeViewModel model)
+        public async Task<IActionResult> CheckLike([FromQuery] CommentCheckLikeViewModel model)
         {
             var result = await _commentLikeService.GetByUserIdAndCommentId(model.UserId, model.CommentId);
             return Ok(result);
