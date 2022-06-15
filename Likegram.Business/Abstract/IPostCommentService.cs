@@ -14,6 +14,7 @@ namespace Likegram.Business.Abstract
         Task<IResult> Update(PostComment postComment);
         Task<IResult> Delete(PostComment postComment);
         Task<IDataResult<List<PostComment>>> GetAll();
+        Task<IDataResult<List<PostComment>>> GetListByPostIdAsync(int postId);
         Task<IDataResult<PostComment>> GetById(int id);
     }
 }
