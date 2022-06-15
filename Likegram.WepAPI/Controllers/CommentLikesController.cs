@@ -1,6 +1,7 @@
 ﻿using Likegram.Business.Abstract;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace Likegram.WepAPI.Controllers
 {
@@ -13,6 +14,17 @@ namespace Likegram.WepAPI.Controllers
         public CommentLikesController(ICommentLikeService commentLikeService)
         {
             _commentLikeService = commentLikeService;
+        }
+        [HttpPost("likeorunlike")]
+        public async Task<IActionResult> LikeOrUnlike()
+        {
+
+        }
+
+        [HttpGet("checklike")]
+        public async Task<IActionResult> CheckLike()
+        {
+
         }
     }
 }
