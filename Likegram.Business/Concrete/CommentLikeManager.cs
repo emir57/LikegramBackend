@@ -52,9 +52,12 @@ namespace Likegram.Business.Concrete
             return new SuccessDataResult<CommentLike>(commentLike);
         }
 
-        public Task<IDataResult<CommentLike>> GetByUserIdAndCommentId(int userId, int commentId)
+        public async Task<IDataResult<CommentLike>> GetByUserIdAndCommentId(int userId, int commentId)
         {
-            throw new NotImplementedException();
+            var commentLike = await _commentLikeDal.Get(c => c.UserId == userId && c.PostCommentId == commentId);
+            if (commentLike == null)
+                return new ErrorDataResult<CommentLike>(BusinessMessages.NotFound);
+            return new SuccessDataResult<CommentLike>(commentLike);
         }
     }
 }
