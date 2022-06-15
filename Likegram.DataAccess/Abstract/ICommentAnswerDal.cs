@@ -10,5 +10,6 @@ namespace Likegram.DataAccess.Abstract
 {
     public interface ICommentAnswerDal : IEntityRepository<CommentAnswer>
     {
+        Task<CommentAnswer> GetByCommentIdAsync(int commentId);
     }
 }
