@@ -46,7 +46,7 @@ namespace Likegram.Business.Concrete
 
         public async Task<IDataResult<List<PostComment>>> GetListByPostIdAsync(int postId)
         {
-            var result = await _postCommentDal.GetAll(c => c.PostId == postId);
+            var result = await _postCommentDal.GetCommentsByPostId(postId);
             return new SuccessDataResult<List<PostComment>>(result, BusinessMessages.SuccessList);
         }
 
