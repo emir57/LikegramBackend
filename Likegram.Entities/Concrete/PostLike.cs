@@ -12,10 +12,12 @@ namespace Likegram.Entities.Concrete
 {
     public class PostLike : BaseEntity
     {
+        [ForeignKey("UserId")]
         public User User { get; set; }
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
 
+        [ForeignKey("PostId")]
         public Post Post { get; set; }
-        public int PostId { get; set; }
+        public int? PostId { get; set; }
     }
 }
