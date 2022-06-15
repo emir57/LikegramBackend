@@ -34,19 +34,7 @@ namespace Likegram.WepAPI.Controllers
             {
                 return BadRequest(result);
             }
-            if (!result.Data.EmailConfirm)
-            {
-                var emailErrorResult = new ErrorDataResult<User>("Lütfen eposta adresinizi onaylayınız");
-                //TODO: send email
-                var rndm = new Random();
-                int number = rndm.Next(1000, 9999);
-                var user = result.Data;
-                user.ConfirmCode = number.ToString();
-                await _userService.Update(user);
-                string body = $"Eposta adresinizi doğrulamak için anahtarınız.\n {number}";
-                await _emailService.SendMailAsync(result.Data.Email, "Email Doğrulama", body);
-                return BadRequest(emailErrorResult);
-            }
+            
             var token = _authService.CreateToken(result.Data);
             if (!token.Success)
             {

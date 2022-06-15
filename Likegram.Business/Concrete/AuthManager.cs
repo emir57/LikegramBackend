@@ -2,6 +2,7 @@
 using Likegram.Business.Constants;
 using Likegram.Core.Entities.Concrete;
 using Likegram.Core.Entities.Dtos;
+using Likegram.Core.Utilities.Email;
 using Likegram.Core.Utilities.Result;
 using Likegram.Core.Utilities.Security.Hash;
 using Likegram.Core.Utilities.Security.JWT;
@@ -17,11 +18,13 @@ namespace Likegram.Business.Concrete
     {
         private readonly ITokenHelper _tokenHelper;
         private readonly IUserService _userService;
+        private readonly IEmailService _emailService;
 
-        public AuthManager(ITokenHelper tokenHelper, IUserService userService)
+        public AuthManager(ITokenHelper tokenHelper, IUserService userService, IEmailService emailService)
         {
             _tokenHelper = tokenHelper;
             _userService = userService;
+            _emailService = emailService;
         }
 
         public IDataResult<AccessToken> CreateToken(User user)
@@ -41,6 +44,18 @@ namespace Likegram.Business.Concrete
             if (!HashingHelper.VerifyPasswordHash(user.Data.PasswordHash, user.Data.PasswordSalt, userForLoginDto.Password))
             {
                 return new ErrorDataResult<User>(BusinessMessages.UserNameOrPasswordWrong);
+            }
+            if (!user.Data.EmailConfirm)
+            {
+                var emailErrorResult = new ErrorDataResult<User>("Lütfen eposta adresinizi onaylayınız");
+                //TODO: send email
+                var rndm = new Random();
+                int number = rndm.Next(1000, 9999);
+                user.Data.ConfirmCode = number.ToString();
+                await _userService.Update(user.Data);
+                string body = $"Eposta adresinizi doğrulamak için anahtarınız.\n {number}";
+                await _emailService.SendMailAsync(user.Data.Email, "Email Doğrulama", body);
+                return emailErrorResult;
             }
             return new SuccessDataResult<User>(user.Data, BusinessMessages.SuccessfulLogin);
         }
