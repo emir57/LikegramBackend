@@ -15,6 +15,6 @@ namespace Likegram.Business.Abstract
         Task<IResult> Delete(CommentAnswer commentAnswer);
         Task<IDataResult<List<CommentAnswer>>> GetAll();
         Task<IDataResult<CommentAnswer>> GetById(int id);
-        Task<IDataResult<CommentAnswer>> GetByCommentIdAsync(int commentId);
+        Task<IDataResult<List<CommentAnswer>>> GetListByCommentIdAsync(int commentId);
     }
 }
