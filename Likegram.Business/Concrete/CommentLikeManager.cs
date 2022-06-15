@@ -1,4 +1,5 @@
 ﻿using Likegram.Business.Abstract;
+using Likegram.Business.Constants;
 using Likegram.Core.Utilities.Result;
 using Likegram.DataAccess.Abstract;
 using Likegram.Entities.Concrete;
@@ -21,7 +22,10 @@ namespace Likegram.Business.Concrete
 
         public async Task<IResult> AddAysnc(CommentLike commentLike)
         {
-            return null;
+            bool result = await _commentLikeDal.Add(commentLike);
+            if (result)
+                return new SuccessResult(BusinessMessages.SuccessAdd);
+            return new ErrorResult(BusinessMessages.UnSuccessfulAdd);
         }
 
         public Task<IResult> CheckLike(int userId, int commentId)
