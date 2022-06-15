@@ -28,6 +28,9 @@ namespace Likegram.DataAccess.Concrete.EntityFramework
                                  CreatedDate = p.CreatedDate,
                                  ImageUrl = p.ImageUrl,
                                  Description = p.Description,
+                                 PostLikes = context.PostLikes.Where(x => x.PostId == p.Id).ToList(),
+                                 PostComments = context.PostComments.Where(x => x.PostId == p.Id).ToList(),
+                                 User = context.Users.SingleOrDefault(x => x.Id == p.UserId)
                              };
                 //result = result.AsNoTracking();
                 //var posts = new List<Post>();
@@ -48,12 +51,14 @@ namespace Likegram.DataAccess.Concrete.EntityFramework
                 //    post.PostComments = comments;
                 //    posts.Add(post);
                 //}
-                return await context.Posts
-                    .Include(x => x.User)
-                    .Include(x => x.PostLikes).ThenInclude(x => x.User)
-                    .Include(x => x.PostComments).ThenInclude(x => x.User)
-                    .Include(x => x.PostComments).ThenInclude(x => x.CommentAnswers)
-                    .ToListAsync();
+
+                //return await context.Posts
+                //    .Include(x => x.User)
+                //    .Include(x => x.PostLikes).ThenInclude(x => x.User)
+                //    .Include(x => x.PostComments).ThenInclude(x => x.User)
+                //    .Include(x => x.PostComments).ThenInclude(x => x.CommentAnswers)
+                //    .ToListAsync();
+                return await result.ToListAsync();
             }
         }
     }
