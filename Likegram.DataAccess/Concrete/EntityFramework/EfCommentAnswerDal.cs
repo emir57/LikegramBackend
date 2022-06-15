@@ -15,7 +15,7 @@ namespace Likegram.DataAccess.Concrete.EntityFramework
     {
         public async Task<List<CommentAnswer>> GetAllByCommentIdAsync(int commentId)
         {
-            using(var context = new LikegramDbContext())
+            using (var context = new LikegramDbContext())
             {
                 var result = from a in context.CommentAnswers
                              where a.PostCommentId == commentId
@@ -26,6 +26,7 @@ namespace Likegram.DataAccess.Concrete.EntityFramework
                                  CreatedDate = a.CreatedDate,
                                  UpdatedDate = a.UpdatedDate,
                                  DeletedDate = a.DeletedDate,
+                                 User = context.Users.SingleOrDefault(u => u.Id == a.UserId)
                              };
                 return await result.ToListAsync();
             }
