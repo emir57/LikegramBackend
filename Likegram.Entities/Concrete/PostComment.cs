@@ -11,9 +11,11 @@ namespace Likegram.Entities.Concrete
 {
     public class PostComment : BaseEntity
     {
-        public int PostId { get; set; }
+        public int? PostId { get; set; }
+        [ForeignKey("PostId")]
         public Post Post { get; set; }
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
+        [ForeignKey("UserId")]
         public User User { get; set; }
         public string Comment { get; set; }
         public List<CommentAnswer> CommentAnswers { get; set; }
