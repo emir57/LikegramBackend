@@ -28,9 +28,12 @@ namespace Likegram.Business.Concrete
             return new ErrorResult(BusinessMessages.UnSuccessfulAdd);
         }
 
-        public Task<IResult> CheckLike(int userId, int commentId)
+        public async Task<IResult> CheckLike(int userId, int commentId)
         {
-            throw new NotImplementedException();
+            var commentLike = await _commentLikeDal.Get(c => c.UserId == userId && c.PostCommentId == commentId);
+            if (commentLike == null)
+                return new ErrorResult(BusinessMessages.NotFound);
+            return new SuccessResult();
         }
 
         public Task<IResult> DeleteAsync(CommentLike commentLike)
