@@ -36,14 +36,17 @@ namespace Likegram.Business.Concrete
             return new SuccessResult();
         }
 
-        public Task<IResult> DeleteAsync(CommentLike commentLike)
+        public async Task<IResult> DeleteAsync(CommentLike commentLike)
         {
-            throw new NotImplementedException();
+            bool result = await _commentLikeDal.Delete(commentLike);
+            if (result)
+                return new SuccessResult(BusinessMessages.SuccessDelete);
+            return new ErrorResult(BusinessMessages.UnSuccessfulDelete);
         }
 
-        public Task<IDataResult<CommentLike>> GetById(int id)
+        public async Task<IDataResult<CommentLike>> GetById(int id)
         {
-            throw new NotImplementedException();
+            var commentLike = await 
         }
 
         public Task<IDataResult<CommentLike>> GetByUserIdAndCommentId(int userId, int commentId)
