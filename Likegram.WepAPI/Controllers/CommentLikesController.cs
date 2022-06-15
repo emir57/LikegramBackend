@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Likegram.Business.Abstract;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Likegram.WepAPI.Controllers
@@ -8,5 +9,10 @@ namespace Likegram.WepAPI.Controllers
     public class CommentLikesController : ControllerBase
     {
         private readonly ICommentLikeService _commentLikeService;
+
+        public CommentLikesController(ICommentLikeService commentLikeService)
+        {
+            _commentLikeService = commentLikeService;
+        }
     }
 }
