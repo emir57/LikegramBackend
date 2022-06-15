@@ -19,7 +19,7 @@ namespace Likegram.WepAPI.Controllers
         {
             _postCommentService = postCommentService;
         }
-        [HttpGet]
+        [HttpGet("getcommentsbypost")]
         public async Task<IActionResult> GetComments(int postId)
         {
             var result = await _postCommentService.GetListByPostIdAsync(postId);
