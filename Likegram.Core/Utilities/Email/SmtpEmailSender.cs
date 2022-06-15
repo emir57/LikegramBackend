@@ -10,8 +10,8 @@ namespace Likegram.Core.Utilities.Email
 {
     public class SmtpEmailSender : IEmailService
     {
-        private string _username = "uzzman24@hotmail.com";
-        private string _password = "---12345hk";
+        private string _username = "name";
+        private string _password = "password";
         private int _port = 587;
         private bool _enableSSL = true;
         private string _host = "smtp-mail.outlook.com";
