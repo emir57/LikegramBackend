@@ -46,7 +46,10 @@ namespace Likegram.Business.Concrete
 
         public async Task<IDataResult<CommentLike>> GetById(int id)
         {
-            var commentLike = await 
+            var commentLike = await _commentLikeDal.Get(c => c.Id == id);
+            if (commentLike == null)
+                return new ErrorDataResult<CommentLike>(BusinessMessages.NotFound);
+            return new SuccessDataResult<CommentLike>(commentLike);
         }
 
         public Task<IDataResult<CommentLike>> GetByUserIdAndCommentId(int userId, int commentId)
