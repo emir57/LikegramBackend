@@ -23,10 +23,9 @@ namespace Likegram.Business.DependencyResolvers.Autofac
 
             #region DataAccess Registers
             builder.RegisterType<EfCommentAnswerDal>().As<ICommentAnswerDal>().SingleInstance();
-            //builder.RegisterType<EfCommentLikeDal>().As<ICommentLikeDal>().SingleInstance();
+            builder.RegisterType<EfCommentLikeDal>().As<ICommentLikeDal>().SingleInstance();
             builder.RegisterType<EfPostCommentDal>().As<IPostCommentDal>().SingleInstance();
             builder.RegisterType<EfPostDal>().As<IPostDal>().SingleInstance();
-            //builder.RegisterType<EfPostLikeDal>().As<IPostLikeDal>().SingleInstance();
             builder.RegisterType<EfRoleDal>().As<IRoleDal>().SingleInstance();
             builder.RegisterType<EfUserDal>().As<IUserDal>().SingleInstance();
             builder.RegisterType<EfUserRoleDal>().As<IUserRoleDal>().SingleInstance();
@@ -38,6 +37,7 @@ namespace Likegram.Business.DependencyResolvers.Autofac
             builder.RegisterType<UserManager>().As<IUserService>().SingleInstance();
             builder.RegisterType<PostCommentManager>().As<IPostCommentService>().SingleInstance();
             builder.RegisterType<PostLikeManager>().As<IPostLikeService>().SingleInstance();
+            builder.RegisterType<CommentLikeManager>().As<ICommentLikeService>().SingleInstance();
             #endregion
 
             builder.RegisterType<HttpContextAccessor>().As<IHttpContextAccessor>().SingleInstance();
