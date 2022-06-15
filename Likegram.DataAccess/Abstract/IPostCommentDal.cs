@@ -10,5 +10,6 @@ namespace Likegram.DataAccess.Abstract
 {
     public interface IPostCommentDal : IEntityRepository<PostComment>
     {
+        Task<List<PostComment>> GetCommentsByPostId(int postId);
     }
 }
