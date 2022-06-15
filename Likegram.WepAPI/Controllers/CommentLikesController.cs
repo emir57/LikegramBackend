@@ -7,5 +7,6 @@ namespace Likegram.WepAPI.Controllers
     [ApiController]
     public class CommentLikesController : ControllerBase
     {
+        private readonly ICommentLikeService _commentLikeService;
     }
 }
