@@ -19,5 +19,6 @@ namespace Likegram.Entities.Concrete
         public User User { get; set; }
         public string Comment { get; set; }
         public List<CommentAnswer> CommentAnswers { get; set; }
+        public List<CommentLike> CommentLikes { get; set; }
     }
 }

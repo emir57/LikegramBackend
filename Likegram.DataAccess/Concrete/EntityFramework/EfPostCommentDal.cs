@@ -28,6 +28,7 @@ namespace Likegram.DataAccess.Concrete.EntityFramework
                                  CreatedDate = c.CreatedDate,
                                  UpdatedDate = c.UpdatedDate,
                                  DeletedDate = c.DeletedDate,
+                                 CommentLikes
                              };
                 return await result.ToListAsync();
             }
