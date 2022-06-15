@@ -28,7 +28,7 @@ namespace Likegram.DataAccess.Concrete.EntityFramework
                                  CreatedDate = c.CreatedDate,
                                  UpdatedDate = c.UpdatedDate,
                                  DeletedDate = c.DeletedDate,
-                                 CommentLikes
+                                 CommentLikes = context.CommentLikes.Where(c => c.PostCommentId == c.Id).ToList()
                              };
                 return await result.ToListAsync();
             }
