@@ -20,5 +20,7 @@ namespace Likegram.Core.Entities.Concrete
         public bool EmailConfirm { get; set; }
         public string ConfirmCode { get; set; }
 
+        public List<UserRole> UserRoles { get; set; }
+
     }
 }

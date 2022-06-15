@@ -118,6 +118,10 @@ namespace Likegram.DataAccess.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("RoleId");
+
+                    b.HasIndex("UserId");
+
                     b.ToTable("UserRoles");
                 });
 
@@ -314,6 +318,25 @@ namespace Likegram.DataAccess.Migrations
                     b.ToTable("PostLikes");
                 });
 
+            modelBuilder.Entity("Likegram.Core.Entities.Concrete.UserRole", b =>
+                {
+                    b.HasOne("Likegram.Core.Entities.Concrete.Role", "Role")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Likegram.Core.Entities.Concrete.User", "User")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Role");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Likegram.Entities.Concrete.CommentAnswer", b =>
                 {
                     b.HasOne("Likegram.Entities.Concrete.PostComment", "PostComment")
@@ -406,6 +429,16 @@ namespace Likegram.DataAccess.Migrations
                     b.Navigation("Post");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Likegram.Core.Entities.Concrete.Role", b =>
+                {
+                    b.Navigation("UserRoles");
+                });
+
+            modelBuilder.Entity("Likegram.Core.Entities.Concrete.User", b =>
+                {
+                    b.Navigation("UserRoles");
                 });
 
             modelBuilder.Entity("Likegram.Entities.Concrete.Post", b =>
