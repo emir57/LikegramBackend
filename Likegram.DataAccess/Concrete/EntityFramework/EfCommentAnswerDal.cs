@@ -13,7 +13,7 @@ namespace Likegram.DataAccess.Concrete.EntityFramework
 {
     public class EfCommentAnswerDal : EFEntityRepostioryBase<CommentAnswer, LikegramDbContext>, ICommentAnswerDal
     {
-        public async Task<CommentAnswer> GetByCommentIdAsync(int commentId)
+        public async Task<List<CommentAnswer>> GetAllByCommentIdAsync(int commentId)
         {
             using(var context = new LikegramDbContext())
             {
