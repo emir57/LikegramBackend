@@ -44,6 +44,12 @@ namespace Likegram.Business.Concrete
             return new SuccessDataResult<PostComment>(result, BusinessMessages.UnSuccessfulList);
         }
 
+        public async Task<IDataResult<List<PostComment>>> GetListByPostIdAsync(int postId)
+        {
+            var result = await _postCommentDal.GetAll(c => c.PostId == postId);
+            return new SuccessDataResult<List<PostComment>>(result, BusinessMessages.SuccessList);
+        }
+
         public async Task<IResult> Update(PostComment postComment)
         {
             await _postCommentDal.Update(postComment);
