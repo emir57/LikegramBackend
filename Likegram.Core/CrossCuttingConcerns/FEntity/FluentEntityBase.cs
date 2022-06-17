@@ -52,7 +52,7 @@ namespace FluentEntity_ConsoleApp.FEntity
         /// <typeparam name="P"></typeparam>
         /// <param name="value"></param>
         /// <returns></returns>
-        public virtual FluentEntityBase<T> AddParameters<P>(object value)
+        public virtual FluentEntityBase<T> AddParameters<P>(P value)
         {
             PropertyInfo[] propertyInfos = _entity.GetType().GetProperties();
             foreach (PropertyInfo propertyInfo in propertyInfos)
