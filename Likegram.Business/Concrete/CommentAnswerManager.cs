@@ -26,6 +26,12 @@ namespace Likegram.Business.Concrete
             return new SuccessResult(BusinessMessages.SuccessAdd);
         }
 
+        public async Task<IDataResult<int>> CommentAnswersCount(int commentId)
+        {
+            var answers = await _commentAnswerDal.GetAll(a => a.PostCommentId == commentId);
+            return new SuccessDataResult<int>(answers.Count);
+        }
+
         public async Task<IResult> Delete(CommentAnswer commentAnswer)
         {
             await _commentAnswerDal.Delete(commentAnswer);
