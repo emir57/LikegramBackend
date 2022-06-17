@@ -49,12 +49,12 @@ namespace Likegram.Business.Concrete
             if (!user.Data.EmailConfirm)
             {
                 var emailErrorResult = new ErrorDataResult<User>("Lütfen eposta adresinizi onaylayınız");
-                //TODO: send email
-                var rndm = new Random();
-                int number = rndm.Next(1000, 9999);
+
+                int number = generateRandomNumber();
                 user.Data.ConfirmCode = number.ToString();
                 await _userService.Update(user.Data);
-                string body = $"Eposta adresinizi doğrulamak için anahtarınız.\n {number}";
+
+                string body = $"Merhaba {user.Data.Username},<br>Eposta adresinizi doğrulamak için anahtarınız.\n {number}";
                 await _emailService.SendMailAsync(user.Data.Email, "Email Doğrulama", body);
                 return emailErrorResult;
             }
