@@ -1,4 +1,5 @@
-﻿using Likegram.Business.Abstract;
+﻿using FluentEntity_ConsoleApp.FEntity;
+using Likegram.Business.Abstract;
 using Likegram.Business.Constants;
 using Likegram.Core.Entities.Concrete;
 using Likegram.Core.Entities.Dtos;
@@ -37,7 +38,7 @@ namespace Likegram.Business.Concrete
         public async Task<IDataResult<User>> Login(UserForLoginDto userForLoginDto)
         {
             var user = await _userService.GetByEmail(userForLoginDto.Email);
-            if(user.Data == null)
+            if (user.Data == null)
             {
                 return new ErrorDataResult<User>(user.Data, BusinessMessages.UserNameOrPasswordWrong);
             }
@@ -64,7 +65,7 @@ namespace Likegram.Business.Concrete
         {
             byte[] passwordHash, passwordSalt;
             var checkUserByEmail = await _userService.GetByEmail(userForRegisterDto.Email);
-            if(checkUserByEmail.Data != null)
+            if (checkUserByEmail.Data != null)
             {
                 return new ErrorDataResult<User>(BusinessMessages.UserEmailAlreadyExists);
             }
@@ -74,12 +75,12 @@ namespace Likegram.Business.Concrete
                 return new ErrorDataResult<User>(BusinessMessages.UserUserNameAlreadyExists);
             }
             HashingHelper.CreatePasswordHash(out passwordHash, out passwordSalt, userForRegisterDto.Password);
-            var user = new FluentUser()
-                .SetEmail(userForRegisterDto.Email)
-                .SetUserName(userForRegisterDto.UserName)
-                .SetPasswordHash(passwordHash)
-                .SetPasswordSalt(passwordSalt)
-                .GetUser();
+            User user = new FluentEntity<User>()
+                .AddParameter(u => u.Email, userForRegisterDto.Email)
+                .AddParameter(u => u.Username, userForRegisterDto.UserName)
+                .AddParameter(u => u.PasswordHash, passwordHash)
+                .AddParameter(u => u.PasswordSalt, passwordSalt)
+                .GetEntity();
             await _userService.Add(user);
             return new SuccessDataResult<User>(user, BusinessMessages.SuccessfulRegister);
         }
