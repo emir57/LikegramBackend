@@ -1,4 +1,5 @@
-﻿using Likegram.Business.Abstract;
+﻿using FluentEntity_ConsoleApp.FEntity;
+using Likegram.Business.Abstract;
 using Likegram.Core.Entities.Concrete;
 using Likegram.Core.Entities.Dtos;
 using Likegram.Core.Utilities.Email;
@@ -34,17 +35,16 @@ namespace Likegram.WepAPI.Controllers
             {
                 return BadRequest(result);
             }
-            
+
             var token = _authService.CreateToken(result.Data);
             if (!token.Success)
             {
                 return BadRequest(token);
             }
-            var loginResponse = new LoginResponseDto
-            {
-                User = result.Data,
-                AccessToken = token.Data
-            };
+            LoginResponseDto loginResponse = new FluentEntity<LoginResponseDto>()
+                .AddParameter(l => l.User, result.Data)
+                .AddParameter(l => l.AccessToken , token.Data)
+                .GetEntity();
             var data = new SuccessDataResult<LoginResponseDto>(loginResponse, "Giriş Başarılı");
             return Ok(data);
         }
