@@ -19,6 +19,14 @@ namespace Likegram.WepAPI.Controllers
         {
             _commentAnswerService = commentAnswerService;
         }
+        [HttpGet("getbycommentid")]
+        public async Task<IActionResult> GetByCommentId(int commentId)
+        {
+            var result = await _commentAnswerService.GetListByCommentIdAsync(commentId);
+            if (!result.Success)
+                return BadRequest(result);
+            return Ok(result);
+        }
 
         [HttpPost("add")]
         public async Task<IActionResult> Add(CommentAnswer commentAnswer)
