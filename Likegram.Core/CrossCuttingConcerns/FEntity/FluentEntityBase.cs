@@ -27,7 +27,7 @@ namespace FluentEntity_ConsoleApp.FEntity
         /// <param name="exp">Expression</param>
         /// <param name="value">Value</param>
         /// <returns></returns>
-        public virtual FluentEntityBase<T> AddParameter<P>(Expression<Func<T, P>> exp, object value)
+        public virtual FluentEntityBase<T> AddParameter<P>(Expression<Func<T, P>> exp, P value)
         {
             string propertyName = (exp.Body as MemberExpression).Member.Name;
             SetProperty(propertyName, value);
