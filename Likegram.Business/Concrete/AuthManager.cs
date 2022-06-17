@@ -84,5 +84,10 @@ namespace Likegram.Business.Concrete
             await _userService.Add(user);
             return new SuccessDataResult<User>(user, BusinessMessages.SuccessfulRegister);
         }
+        private int generateRandomNumber()
+        {
+            Random rndm = new Random();
+            return rndm.Next(1000, 9999);
+        }
     }
 }
