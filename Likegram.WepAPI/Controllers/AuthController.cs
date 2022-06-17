@@ -43,7 +43,7 @@ namespace Likegram.WepAPI.Controllers
             }
             LoginResponseDto loginResponse = new FluentEntity<LoginResponseDto>()
                 .AddParameter(l => l.User, result.Data)
-                .AddParameter(l => l.AccessToken , token.Data)
+                .AddParameter(l => l.AccessToken, token.Data)
                 .GetEntity();
             var data = new SuccessDataResult<LoginResponseDto>(loginResponse, "Giriş Başarılı");
             return Ok(data);
@@ -65,7 +65,9 @@ namespace Likegram.WepAPI.Controllers
             if (confirmKey == userResult.Data.ConfirmCode)
             {
                 var user = userResult.Data;
-                user.EmailConfirm = true;
+                user = new FluentEntity<User>(user)
+                    .AddParameter(u => u.EmailConfirm, true)
+                    .GetEntity();
                 await _userService.Update(user);
                 var successResult = new SuccessResult("Doğrulama başarılı");
                 return Ok(successResult);
