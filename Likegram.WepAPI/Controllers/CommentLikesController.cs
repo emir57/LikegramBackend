@@ -1,4 +1,6 @@
-﻿using Likegram.Business.Abstract;
+﻿using FluentEntity_ConsoleApp.FEntity;
+using Likegram.Business.Abstract;
+using Likegram.Entities.Concrete;
 using Likegram.WepAPI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -25,11 +27,11 @@ namespace Likegram.WepAPI.Controllers
                 var result1 = await _commentLikeService.DeleteAsync(commentLikeResult.Data);
                 return Ok(result1);
             }
-            var result2 = await _commentLikeService.AddAysnc(new Entities.Concrete.CommentLike
-            {
-                UserId = model.UserId,
-                PostCommentId = model.CommentId
-            });
+            CommentLike commentLike = new FluentEntity<CommentLike>()
+                .AddParameter(c => c.UserId, model.UserId)
+                .AddParameter(c => c.PostCommentId, model.CommentId)
+                .GetEntity();
+            var result2 = await _commentLikeService.AddAysnc(commentLike);
             return Ok(result2);
         }
 
