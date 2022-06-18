@@ -14,8 +14,8 @@ namespace Likegram.Business.Abstract
         Task<IResult> UpdateAsync(FavouritePost favouritePost);
         Task<IResult> DeleteAsync(FavouritePost favouritePost);
         Task<IDataResult<FavouritePost>> GetByIdAsync(int id);
-        Task<IDataResult<List<FavouritePost>>> GetListByUserId(int userId);
-        Task<IDataResult<Post>> GetListByUserIdAndPostId(int userId,int postId);
-        Task<IDataResult<List<FavouritePost>>> GetList();
+        Task<IDataResult<List<FavouritePost>>> GetListByUserIdAsync(int userId);
+        Task<IDataResult<Post>> GetListByUserIdAndPostIdAsync(int userId,int postId);
+        Task<IDataResult<List<FavouritePost>>> GetListAsync();
     }
 }

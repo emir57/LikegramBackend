@@ -44,19 +44,19 @@ namespace Likegram.Business.Concrete
             return new ErrorDataResult<FavouritePost>();
         }
 
-        public async Task<IDataResult<List<FavouritePost>>> GetList()
+        public async Task<IDataResult<List<FavouritePost>>> GetListAsync()
         {
             var favouritePosts = await _favouritePostDal.GetAll();
             return new SuccessDataResult<List<FavouritePost>>(favouritePosts, BusinessMessages.SuccessList);
         }
 
-        public async Task<IDataResult<List<FavouritePost>>> GetListByUserId(int userId)
+        public async Task<IDataResult<List<FavouritePost>>> GetListByUserIdAsync(int userId)
         {
             var favouritePosts = await _favouritePostDal.GetAll(f => f.UserId == userId);
             return new SuccessDataResult<List<FavouritePost>>(favouritePosts, BusinessMessages.SuccessList);
         }
 
-        public Task<IDataResult<Post>> GetListByUserIdAndPostId(int userId, int postId)
+        public Task<IDataResult<Post>> GetListByUserIdAndPostIdAsync(int userId, int postId)
         {
             throw new NotImplementedException();
         }
