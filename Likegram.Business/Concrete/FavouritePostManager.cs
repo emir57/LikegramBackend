@@ -1,4 +1,5 @@
 ﻿using Likegram.Business.Abstract;
+using Likegram.Business.Constants;
 using Likegram.Core.Utilities.Result;
 using Likegram.DataAccess.Abstract;
 using Likegram.Entities.Concrete;
@@ -19,9 +20,12 @@ namespace Likegram.Business.Concrete
             _favouritePostDal = favouritePostDal;
         }
 
-        public Task<IResult> AddAsync(FavouritePost favouritePost)
+        public async Task<IResult> AddAsync(FavouritePost favouritePost)
         {
-            throw new NotImplementedException();
+            var result = await _favouritePostDal.Add(favouritePost);
+            if (result)
+                return new SuccessResult(BusinessMessages.SuccessAdd);
+            return new ErrorResult(BusinessMessages.UnSuccessfulAdd);
         }
 
         public Task<IResult> DeleteAsync(FavouritePost favouritePost)
