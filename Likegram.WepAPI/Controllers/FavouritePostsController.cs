@@ -25,7 +25,7 @@ namespace Likegram.WepAPI.Controllers
             return Ok(result);
         }
         [HttpGet("checkfavouritepost")]
-        public async Task<IActionResult> CheckFavouritePost(int userId,int postId)
+        public async Task<IActionResult> CheckFavouritePost(int userId, int postId)
         {
             var result = await _favouritePostService.GetByUserIdAndPostIdAsync(userId, postId);
             return Ok(result);
@@ -35,6 +35,14 @@ namespace Likegram.WepAPI.Controllers
         public async Task<IActionResult> Add(FavouritePost favouritePost)
         {
             var result = await _favouritePostService.AddAsync(favouritePost);
+            if (!result.Success)
+                return BadRequest(result);
+            return Ok(result);
+        }
+        [HttpPut]
+        public async Task<IActionResult> Update(FavouritePost favouritePost)
+        {
+            var result = await _favouritePostService.UpdateAsync(favouritePost);
             if (!result.Success)
                 return BadRequest(result);
             return Ok(result);
