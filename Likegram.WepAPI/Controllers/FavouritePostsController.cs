@@ -1,6 +1,7 @@
 ﻿using Likegram.Business.Abstract;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace Likegram.WepAPI.Controllers
 {
@@ -13,6 +14,14 @@ namespace Likegram.WepAPI.Controllers
         public FavouritePostsController(IFavouritePostService favouritePostService)
         {
             _favouritePostService = favouritePostService;
+        }
+        [HttpGet("getfavouriteposts")]
+        public async Task<IActionResult> GetFavouritePosts(int userId)
+        {
+            var result = await _favouritePostService.GetListByUserIdAsync(userId);
+            if (!result.Success)
+                return BadRequest(result);
+            return Ok(result);
         }
     }
 }
