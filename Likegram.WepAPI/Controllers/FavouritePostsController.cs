@@ -1,6 +1,7 @@
 ﻿using FluentEntity_ConsoleApp.FEntity;
 using Likegram.Business.Abstract;
 using Likegram.Entities.Concrete;
+using Likegram.WepAPI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -32,14 +33,14 @@ namespace Likegram.WepAPI.Controllers
             return Ok(result);
         }
         [HttpPost("deleteoradd")]
-        public async Task<IActionResult> DeleteOrAdd([FromBody] int userId, int postId)
+        public async Task<IActionResult> DeleteOrAdd(FavouritePostAddOrDeleteViewModel model)
         {
-            var result = await _favouritePostService.GetByUserIdAndPostIdAsync(userId, postId);
+            var result = await _favouritePostService.GetByUserIdAndPostIdAsync(model.UserId, model.PostId);
             if (result == null)
             {
                 FavouritePost favouritePost = new FluentEntity<FavouritePost>()
-                    .AddParameter(f => f.UserId, userId)
-                    .AddParameter(f => f.PostId, postId)
+                    .AddParameter(f => f.UserId, model.UserId)
+                    .AddParameter(f => f.PostId, model.PostId)
                     .GetEntity();
                 var addResult = await _favouritePostService.AddAsync(favouritePost);
                 return Ok(addResult);
