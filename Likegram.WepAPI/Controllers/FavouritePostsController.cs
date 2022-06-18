@@ -1,4 +1,5 @@
 ﻿using Likegram.Business.Abstract;
+using Likegram.Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -27,6 +28,15 @@ namespace Likegram.WepAPI.Controllers
         public async Task<IActionResult> CheckFavouritePost(int userId,int postId)
         {
             var result = await _favouritePostService.GetByUserIdAndPostIdAsync(userId, postId);
+            return Ok(result);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Add(FavouritePost favouritePost)
+        {
+            var result = await _favouritePostService.AddAsync(favouritePost);
+            if (!result.Success)
+                return BadRequest(result);
             return Ok(result);
         }
     }
