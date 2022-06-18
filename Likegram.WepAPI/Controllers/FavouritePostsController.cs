@@ -36,7 +36,7 @@ namespace Likegram.WepAPI.Controllers
         public async Task<IActionResult> DeleteOrAdd(FavouritePostAddOrDeleteViewModel model)
         {
             var result = await _favouritePostService.GetByUserIdAndPostIdAsync(model.UserId, model.PostId);
-            if (result == null)
+            if (!result.Success)
             {
                 FavouritePost favouritePost = new FluentEntity<FavouritePost>()
                     .AddParameter(f => f.UserId, model.UserId)
