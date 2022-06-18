@@ -36,9 +36,12 @@ namespace Likegram.Business.Concrete
             return new ErrorResult(BusinessMessages.UnSuccessfulDelete);
         }
 
-        public Task<IDataResult<FavouritePost>> GetByIdAsync(int id)
+        public async Task<IDataResult<FavouritePost>> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var favouritePost = await _favouritePostDal.Get(f => f.Id == id);
+            if (favouritePost != null)
+                return new SuccessDataResult<FavouritePost>(favouritePost);
+            return new ErrorDataResult<FavouritePost>();
         }
 
         public Task<IDataResult<List<FavouritePost>>> GetList()
