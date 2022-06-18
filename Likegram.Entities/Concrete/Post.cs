@@ -17,5 +17,6 @@ namespace Likegram.Entities.Concrete
         public List<PostComment> PostComments { get; set; }
         public string Description { get; set; }
         public List<PostLike> PostLikes { get; set; }
+        public List<FavouritePost> FavouritePosts { get; set; }
     }
 }
