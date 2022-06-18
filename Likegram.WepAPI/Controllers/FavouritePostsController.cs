@@ -32,7 +32,7 @@ namespace Likegram.WepAPI.Controllers
             return Ok(result);
         }
         [HttpPost("deleteoradd")]
-        public async Task<IActionResult> DeleteOrAdd(int userId, int postId)
+        public async Task<IActionResult> DeleteOrAdd([FromBody] int userId, [FromBody] int postId)
         {
             var result = await _favouritePostService.GetByUserIdAndPostIdAsync(userId, postId);
             if (result == null)
