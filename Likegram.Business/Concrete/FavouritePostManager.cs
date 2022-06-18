@@ -64,9 +64,12 @@ namespace Likegram.Business.Concrete
             return new ErrorDataResult<FavouritePost>();
         }
 
-        public Task<IResult> UpdateAsync(FavouritePost favouritePost)
+        public async Task<IResult> UpdateAsync(FavouritePost favouritePost)
         {
-            throw new NotImplementedException();
+            var result = await _favouritePostDal.Update(favouritePost);
+            if (result)
+                return new SuccessResult(BusinessMessages.SuccessUpdate);
+            return new ErrorResult(BusinessMessages.UnSuccessfulUpdate);
         }
     }
 }
