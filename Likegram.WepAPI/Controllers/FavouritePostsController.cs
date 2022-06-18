@@ -47,5 +47,16 @@ namespace Likegram.WepAPI.Controllers
                 return BadRequest(result);
             return Ok(result);
         }
+        [HttpDelete]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var favouritePostResult = await _favouritePostService.GetByIdAsync(id);
+            if (!favouritePostResult.Success)
+                return BadRequest(favouritePostResult);
+            var result = await _favouritePostService.DeleteAsync(favouritePostResult.Data);
+            if (!result.Success)
+                return BadRequest(result);
+            return Ok(result);
+        }
     }
 }
