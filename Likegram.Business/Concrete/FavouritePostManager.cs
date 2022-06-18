@@ -1,5 +1,6 @@
 ﻿using Likegram.Business.Abstract;
 using Likegram.Core.Utilities.Result;
+using Likegram.DataAccess.Abstract;
 using Likegram.Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,13 @@ namespace Likegram.Business.Concrete
 {
     public class FavouritePostManager : IFavouritePostService
     {
+        private readonly IFavouritePostDal _favouritePostDal;
+
+        public FavouritePostManager(IFavouritePostDal favouritePostDal)
+        {
+            _favouritePostDal = favouritePostDal;
+        }
+
         public Task<IResult> AddAsync(FavouritePost favouritePost)
         {
             throw new NotImplementedException();
