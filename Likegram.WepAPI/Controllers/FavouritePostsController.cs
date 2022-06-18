@@ -23,5 +23,11 @@ namespace Likegram.WepAPI.Controllers
                 return BadRequest(result);
             return Ok(result);
         }
+        [HttpGet("checkfavouritepost")]
+        public async Task<IActionResult> CheckFavouritePost(int userId,int postId)
+        {
+            var result = await _favouritePostService.GetByUserIdAndPostIdAsync(userId, postId);
+            return Ok(result);
+        }
     }
 }
