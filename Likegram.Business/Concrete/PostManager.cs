@@ -38,9 +38,9 @@ namespace Likegram.Business.Concrete
             return new SuccessDataResult<List<Post>>(result, BusinessMessages.SuccessList);
         }
 
-        public async Task<IDataResult<List<Post>>> GetAllByFollowedUser(int followingUserId, int currentUserId)
+        public async Task<IDataResult<List<Post>>> GetAllByFollowedUser(int followingUserId)
         {
-            var result = await _postDal.GetAllByFollowedUser(followingUserId, currentUserId);
+            var result = await _postDal.GetAllByFollowedUser(followingUserId);
             return new SuccessDataResult<List<Post>>(result, BusinessMessages.SuccessList);
         }
 

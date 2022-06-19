@@ -10,6 +10,6 @@ namespace Likegram.DataAccess.Abstract
 {
     public interface IPostDal : IEntityRepository<Post>
     {
-        Task<List<Post>> GetAllByFollowedUser(int followingUserId, int currentUserId);
+        Task<List<Post>> GetAllByFollowedUser(int followingUserId);
     }
 }

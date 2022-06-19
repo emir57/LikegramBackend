@@ -14,7 +14,7 @@ namespace Likegram.DataAccess.Concrete.EntityFramework
 {
     public class EfPostDal : EFEntityRepostioryBase<Post, LikegramDbContext>, IPostDal
     {
-        public async Task<List<Post>> GetAllByFollowedUser(int followingUserId, int currentUserId)
+        public async Task<List<Post>> GetAllByFollowedUser(int followingUserId)
         {
             using (var context = new LikegramDbContext())
             {
@@ -31,8 +31,8 @@ namespace Likegram.DataAccess.Concrete.EntityFramework
                                  PostLikes = context.PostLikes.Where(x => x.PostId == p.Id).ToList(),
                                  PostComments = context.PostComments.Where(x => x.PostId == p.Id).ToList(),
                                  User = context.Users.SingleOrDefault(x => x.Id == p.UserId),
-                                 IsClickHeart = context.PostLikes.SingleOrDefault(x => x.PostId == p.Id && x.UserId == currentUserId) == null ? false : true,
-                                 IsClickBookmark = context.FavouritePosts.SingleOrDefault(x => x.PostId == p.Id && x.UserId == currentUserId) == null ? false : true
+                                 IsClickHeart = context.PostLikes.SingleOrDefault(x => x.PostId == p.Id && x.UserId == followingUserId) == null ? false : true,
+                                 IsClickBookmark = context.FavouritePosts.SingleOrDefault(x => x.PostId == p.Id && x.UserId == followingUserId) == null ? false : true
                              };
                 //result = result.AsNoTracking();
                 //var posts = new List<Post>();
