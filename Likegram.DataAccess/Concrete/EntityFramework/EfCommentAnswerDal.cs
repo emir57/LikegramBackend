@@ -1,4 +1,6 @@
-﻿using Likegram.Core.DataAccess.Entityframework;
+﻿using FluentEntity_ConsoleApp.FEntity;
+using Likegram.Core.DataAccess.Entityframework;
+using Likegram.Core.Entities.Concrete;
 using Likegram.DataAccess.Abstract;
 using Likegram.DataAccess.Contexts;
 using Likegram.Entities.Concrete;
@@ -26,7 +28,13 @@ namespace Likegram.DataAccess.Concrete.EntityFramework
                                  CreatedDate = a.CreatedDate,
                                  UpdatedDate = a.UpdatedDate,
                                  DeletedDate = a.DeletedDate,
-                                 User = context.Users.SingleOrDefault(u => u.Id == a.UserId)
+                                 User = context.Users
+                                    .Select(u => new FluentEntity<User>()
+                                    .AddParameter(x => x.Username, u.Username)
+                                    .AddParameter(x => x.Email, u.Email)
+                                    .AddParameter(x => x.ProfilePhoto, u.ProfilePhoto)
+                                    .GetEntity())
+                                    .SingleOrDefault(u => u.Id == a.UserId)
                              };
                 return await result.ToListAsync();
             }
