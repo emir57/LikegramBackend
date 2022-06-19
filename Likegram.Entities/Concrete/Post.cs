@@ -21,5 +21,8 @@ namespace Likegram.Entities.Concrete
 
         [NotMapped]
         public bool IsClickHeart { get; set; }
+
+        [NotMapped]
+        public bool IsClickBookmark { get; set; }
     }
 }
