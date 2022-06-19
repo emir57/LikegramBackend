@@ -25,7 +25,7 @@ namespace Likegram.WepAPI.Controllers
             _postService = postService;
         }
         [HttpGet("getbyfolloweduser")]
-        public async Task<IActionResult> GetByFollowedUser(int followingUserId)
+        public async Task<IActionResult> GetByFollowedUser(int followingUserId, int currentUser)
         {
             var result = await _postService.GetAllByFollowedUser(followingUserId);
             return Ok(result);
