@@ -32,7 +32,7 @@ namespace Likegram.DataAccess.Concrete.EntityFramework
                                  PostComments = context.PostComments.Where(x => x.PostId == p.Id).ToList(),
                                  User = context.Users.SingleOrDefault(x => x.Id == p.UserId),
                                  IsClickHeart = context.PostLikes.SingleOrDefault(x => x.PostId == p.Id && x.UserId == currentUserId) == null ? false : true,
-                                 IsClickBookmark = context.
+                                 IsClickBookmark = context.FavouritePosts.SingleOrDefault(x => x.PostId == p.Id && x.UserId == currentUserId) == null ? false : true
                              };
                 //result = result.AsNoTracking();
                 //var posts = new List<Post>();
