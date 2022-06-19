@@ -218,7 +218,7 @@ namespace Likegram.DataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("FavouritePost");
+                    b.ToTable("FavouritePosts");
                 });
 
             modelBuilder.Entity("Likegram.Entities.Concrete.FollowUser", b =>

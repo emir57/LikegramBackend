@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Likegram.DataAccess.Migrations
 {
     [DbContext(typeof(LikegramDbContext))]
-    [Migration("20220618145817_mig2")]
-    partial class mig2
+    [Migration("20220619091842_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -220,7 +220,7 @@ namespace Likegram.DataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("FavouritePost");
+                    b.ToTable("FavouritePosts");
                 });
 
             modelBuilder.Entity("Likegram.Entities.Concrete.FollowUser", b =>

@@ -131,6 +131,35 @@ namespace Likegram.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "FavouritePosts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: true),
+                    PostId = table.Column<int>(type: "int", nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FavouritePosts", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_FavouritePosts_Posts_PostId",
+                        column: x => x.PostId,
+                        principalTable: "Posts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_FavouritePosts_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "PostComments",
                 columns: table => new
                 {
@@ -269,6 +298,16 @@ namespace Likegram.DataAccess.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_FavouritePosts_PostId",
+                table: "FavouritePosts",
+                column: "PostId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_FavouritePosts_UserId",
+                table: "FavouritePosts",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_FollowUsers_FollowedUserId",
                 table: "FollowUsers",
                 column: "FollowedUserId");
@@ -321,6 +360,9 @@ namespace Likegram.DataAccess.Migrations
 
             migrationBuilder.DropTable(
                 name: "CommentLikes");
+
+            migrationBuilder.DropTable(
+                name: "FavouritePosts");
 
             migrationBuilder.DropTable(
                 name: "FollowUsers");
