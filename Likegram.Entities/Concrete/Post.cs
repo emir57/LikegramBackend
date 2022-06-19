@@ -18,5 +18,8 @@ namespace Likegram.Entities.Concrete
         public string Description { get; set; }
         public List<PostLike> PostLikes { get; set; }
         public List<FavouritePost> FavouritePosts { get; set; }
+
+        [NotMapped]
+        public bool IsClickHeart { get; set; }
     }
 }
