@@ -13,6 +13,10 @@ namespace Likegram.DataAccess.Contexts
 {
     public class LikegramDbContext : DbContext
     {
+        public LikegramDbContext()
+        {
+            ChangeTracker.LazyLoadingEnabled = false;
+        }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Server=DESKTOP-HVLQH67\SQLEXPRESS;Database=LikegramDb;integrated security=true;");
