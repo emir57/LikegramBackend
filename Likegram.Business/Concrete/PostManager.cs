@@ -1,5 +1,6 @@
 ﻿using Likegram.Business.Abstract;
 using Likegram.Business.Constants;
+using Likegram.Core.Aspects.Autofac.Performance;
 using Likegram.Core.Utilities.Result;
 using Likegram.DataAccess.Abstract;
 using Likegram.Entities.Concrete;
@@ -37,7 +38,7 @@ namespace Likegram.Business.Concrete
             var result = await _postDal.GetAll();
             return new SuccessDataResult<List<Post>>(result, BusinessMessages.SuccessList);
         }
-
+        [PerformanceAspect(3)]
         public async Task<IDataResult<List<Post>>> GetAllByFollowedUser(int followingUserId)
         {
             var result = await _postDal.GetAllByFollowedUser(followingUserId);
