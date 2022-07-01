@@ -27,7 +27,7 @@ namespace Likegram.Core.Aspects.Autofac.Performance
         protected override void OnAFter(IInvocation invocation)
         {
             _stopwatch.Stop();
-            if(_stopwatch.Elapsed.TotalSeconds > _interval)
+            if (_stopwatch.Elapsed.TotalSeconds > _interval)
             {
                 Debug.WriteLine($"{invocation.Method.DeclaringType.FullName}.{invocation.Method.Name}-->{_stopwatch.Elapsed.TotalSeconds} seconds");
             }
