@@ -9,9 +9,11 @@ namespace Likegram.WepAPI.Controllers
     public class UsersController : ControllerBase
     {
         private readonly IPostService _postService;
-        public UsersController(IPostService postService)
+        private readonly IFollowUserService _followUserService;
+        public UsersController(IPostService postService, IFollowUserService followUserService)
         {
             _postService = postService;
+            _followUserService = followUserService;
         }
 
         [HttpGet("postcount/{userId}")]
@@ -26,7 +28,19 @@ namespace Likegram.WepAPI.Controllers
         [HttpGet("followedUserCount/{followingUserId}")]
         public async Task<IActionResult> FollowedUserCount(int followingUserId)
         {
-            return Ok();
+            var result = await _followUserService.GetListByFollowedUserIdAsync(followingUserId);
+            if (result.Success)
+                return Ok(result);
+            return BadRequest(result);
+        }
+
+        [HttpGet("followingUserCount/{followedUserId}")]
+        public async Task<IActionResult> FollowingUserCount(int followedUserId)
+        {
+            var result = await _followUserService.GetListByFollowingUserIdAsync(followedUserId);
+            if (result.Success)
+                return Ok(result);
+            return BadRequest(result);
         }
     }
 }
