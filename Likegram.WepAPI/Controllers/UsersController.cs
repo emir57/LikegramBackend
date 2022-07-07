@@ -28,7 +28,7 @@ namespace Likegram.WepAPI.Controllers
         [HttpGet("followedUserCount/{followingUserId}")]
         public async Task<IActionResult> FollowedUserCount(int followingUserId)
         {
-            var result = await _followUserService.GetListByFollowedUserIdAsync(followingUserId);
+            var result = await _followUserService.GetListByFollowedUserAsync(followingUserId);
             if (result.Success)
                 return Ok(result);
             return BadRequest(result);
@@ -37,7 +37,7 @@ namespace Likegram.WepAPI.Controllers
         [HttpGet("followingUserCount/{followedUserId}")]
         public async Task<IActionResult> FollowingUserCount(int followedUserId)
         {
-            var result = await _followUserService.GetListByFollowingUserIdAsync(followedUserId);
+            var result = await _followUserService.GetListByFollowingUserAsync(followedUserId);
             if (result.Success)
                 return Ok(result);
             return BadRequest(result);
