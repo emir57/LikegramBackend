@@ -17,7 +17,10 @@ namespace Likegram.WepAPI.Controllers
         [HttpGet("postcount/{userId}")]
         public async Task<IActionResult> PostCount(int userId)
         {
-            
-        } 
+            var result = await _postService.GetPostCountByUserIdAsync(userId);
+            if (result.Success)
+                return Ok(result);
+            return BadRequest(result);
+        }
     }
 }
