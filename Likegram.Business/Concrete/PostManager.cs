@@ -45,6 +45,12 @@ namespace Likegram.Business.Concrete
             return new SuccessDataResult<List<Post>>(result, BusinessMessages.SuccessList);
         }
 
+        public async Task<IDataResult<int>> GetPostCountByUserIdAsync(int userId)
+        {
+            var posts = await _postDal.GetAll(p => p.UserId == userId);
+            return new SuccessDataResult<int>(posts.Count);
+        }
+
         public async Task<IResult> Update(Post post)
         {
             await _postDal.Update(post);
