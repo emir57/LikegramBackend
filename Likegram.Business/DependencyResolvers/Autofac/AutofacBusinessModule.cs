@@ -41,6 +41,7 @@ namespace Likegram.Business.DependencyResolvers.Autofac
             builder.RegisterType<PostLikeManager>().As<IPostLikeService>().SingleInstance();
             builder.RegisterType<CommentLikeManager>().As<ICommentLikeService>().SingleInstance();
             builder.RegisterType<FavouritePostManager>().As<IFavouritePostService>().SingleInstance();
+            builder.RegisterType<FollowUserManager>().As<IFollowUserService>().SingleInstance();
             #endregion
 
             builder.RegisterType<HttpContextAccessor>().As<IHttpContextAccessor>().SingleInstance();
