@@ -11,7 +11,7 @@ namespace Likegram.Business.Abstract
         Task<IResult> DeleteAsync(FollowUser followUser);
         Task<IDataResult<FollowUser>> GetByIdAsync(int id);
         Task<IDataResult<List<FollowUser>>> GetListAsync();
-        Task<IDataResult<List<FollowUser>>> GetListByFollowedUserIdAsync(int followedUserId);
-        Task<IDataResult<List<FollowUser>>> GetListByFollowingUserIdAsync(int followingUserId);
+        Task<IDataResult<List<FollowUser>>> GetListByFollowedUserIdAsync(int followingUserId); 
+        Task<IDataResult<List<FollowUser>>> GetListByFollowingUserIdAsync(int followedUserId);
     }
 }

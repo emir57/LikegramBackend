@@ -41,15 +41,15 @@ namespace Likegram.Business.Concrete
             return new SuccessDataResult<List<FollowUser>>(result);
         }
 
-        public async Task<IDataResult<List<FollowUser>>> GetListByFollowedUserIdAsync(int followedUserId)
+        public async Task<IDataResult<List<FollowUser>>> GetListByFollowedUserIdAsync(int followingUserId)
         {
-            var result = await _followUserDal.GetAll(f => f.FollowedUserId == followedUserId);
+            var result = await _followUserDal.GetAll(f => f.FollowingUserId == followingUserId);
             return new SuccessDataResult<List<FollowUser>>(result);
         }
 
-        public async Task<IDataResult<List<FollowUser>>> GetListByFollowingUserIdAsync(int followingUserId)
+        public async Task<IDataResult<List<FollowUser>>> GetListByFollowingUserIdAsync(int followedUserId)
         {
-            var result = await _followUserDal.GetAll(f => f.FollowingUserId == followingUserId);
+            var result = await _followUserDal.GetAll(f => f.FollowedUserId == followedUserId);
             return new SuccessDataResult<List<FollowUser>>(result);
         }
     }

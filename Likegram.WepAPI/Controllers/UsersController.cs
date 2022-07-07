@@ -22,5 +22,11 @@ namespace Likegram.WepAPI.Controllers
                 return Ok(result);
             return BadRequest(result);
         }
+
+        [HttpGet("followedUserCount/{followingUserId}")]
+        public async Task<IActionResult> FollowedUserCount(int followingUserId)
+        {
+            return Ok();
+        }
     }
 }
