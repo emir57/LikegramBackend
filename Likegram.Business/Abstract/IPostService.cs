@@ -15,5 +15,6 @@ namespace Likegram.Business.Abstract
         Task<IResult> Delete(Post post);
         Task<IDataResult<List<Post>>> GetAll();
         Task<IDataResult<List<Post>>> GetAllByFollowedUser(int followingUserId);
+        Task<IDataResult<int>> GetPostCountByUserIdAsync(int userId);
     }
 }
