@@ -19,7 +19,7 @@ namespace Likegram.WepAPI.Controllers
             _favouritePostService = favouritePostService;
         }
         [HttpGet("getfavouriteposts")]
-        public async Task<IActionResult> GetFavouritePosts(int userId)
+        public async Task<IActionResult> GetFavouritePosts([FromQuery] int userId)
         {
             var result = await _favouritePostService.GetListByUserIdAsync(userId);
             if (!result.Success)
@@ -27,13 +27,13 @@ namespace Likegram.WepAPI.Controllers
             return Ok(result);
         }
         [HttpGet("checkfavouritepost")]
-        public async Task<IActionResult> CheckFavouritePost(int userId, int postId)
+        public async Task<IActionResult> CheckFavouritePost([FromQuery] int userId, int postId)
         {
             var result = await _favouritePostService.GetByUserIdAndPostIdAsync(userId, postId);
             return Ok(result);
         }
-        [HttpPost("deleteoradd")]
-        public async Task<IActionResult> DeleteOrAdd(FavouritePostAddOrDeleteViewModel model)
+        [HttpPost]
+        public async Task<IActionResult> DeleteOrAdd([FromBody] FavouritePostAddOrDeleteViewModel model)
         {
             var result = await _favouritePostService.GetByUserIdAndPostIdAsync(model.UserId, model.PostId);
             if (!result.Success)
@@ -50,7 +50,7 @@ namespace Likegram.WepAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(FavouritePost favouritePost)
+        public async Task<IActionResult> Add([FromBody] FavouritePost favouritePost)
         {
             var result = await _favouritePostService.AddAsync(favouritePost);
             if (!result.Success)
@@ -58,14 +58,14 @@ namespace Likegram.WepAPI.Controllers
             return Ok(result);
         }
         [HttpPut]
-        public async Task<IActionResult> Update(FavouritePost favouritePost)
+        public async Task<IActionResult> Update([FromBody] FavouritePost favouritePost)
         {
             var result = await _favouritePostService.UpdateAsync(favouritePost);
             if (!result.Success)
                 return BadRequest(result);
             return Ok(result);
         }
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             var favouritePostResult = await _favouritePostService.GetByIdAsync(id);
