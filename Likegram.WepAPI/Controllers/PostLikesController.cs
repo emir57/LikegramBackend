@@ -2,7 +2,6 @@
 using Likegram.Business.Abstract;
 using Likegram.Entities.Concrete;
 using Likegram.WepAPI.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -17,8 +16,8 @@ namespace Likegram.WepAPI.Controllers
         {
             _postLikesService = postLikesService;
         }
-        [HttpPost("likeorunlike")]
-        public async Task<IActionResult> LikeOrUnLike(PostLikeOrUnlikeViewModel likeOrUnlikeViewModel)
+        [HttpPost]
+        public async Task<IActionResult> LikeOrUnLike([FromBody] PostLikeOrUnlikeViewModel likeOrUnlikeViewModel)
         {
             var result = await _postLikesService.GetByUserIdAndPostId(likeOrUnlikeViewModel.UserId, likeOrUnlikeViewModel.PostId);
             if (result.Success)
