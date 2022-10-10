@@ -75,7 +75,7 @@ namespace Likegram.WepAPI
                 {
                     policy.AllowAnyMethod()
                         .AllowAnyHeader()
-                        .WithOrigins("http://localhost:8100");
+                        .WithOrigins("http://localhost:4200");
                 });
             });
 
