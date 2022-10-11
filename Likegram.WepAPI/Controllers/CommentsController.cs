@@ -1,10 +1,6 @@
 ﻿using Likegram.Business.Abstract;
 using Likegram.Entities.Concrete;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Likegram.WepAPI.Controllers
@@ -19,8 +15,8 @@ namespace Likegram.WepAPI.Controllers
         {
             _postCommentService = postCommentService;
         }
-        [HttpGet("getcommentsbypost")]
-        public async Task<IActionResult> GetComments(int postId)
+        [HttpGet("postComments/{postId}")]
+        public async Task<IActionResult> GetComments([FromRoute] int postId)
         {
             var result = await _postCommentService.GetListByPostIdAsync(postId);
             if (!result.Success)
@@ -28,8 +24,8 @@ namespace Likegram.WepAPI.Controllers
             return Ok(result);
         }
 
-        [HttpPost("add")]
-        public async Task<IActionResult> Add(PostComment postComment)
+        [HttpPost]
+        public async Task<IActionResult> Add([FromBody] PostComment postComment)
         {
             var result = await _postCommentService.Add(postComment);
             if (!result.Success)
@@ -38,8 +34,8 @@ namespace Likegram.WepAPI.Controllers
             }
             return Ok(result);
         }
-        [HttpPut("update")]
-        public async Task<IActionResult> Update(PostComment postComment)
+        [HttpPut]
+        public async Task<IActionResult> Update([FromBody] PostComment postComment)
         {
             var result = await _postCommentService.Update(postComment);
             if (!result.Success)
@@ -48,7 +44,7 @@ namespace Likegram.WepAPI.Controllers
             }
             return Ok(result);
         }
-        [HttpDelete("delete")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             var commentResult = await _postCommentService.GetById(id);
