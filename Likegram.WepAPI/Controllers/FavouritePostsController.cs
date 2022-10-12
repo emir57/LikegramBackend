@@ -22,7 +22,7 @@ namespace Likegram.WepAPI.Controllers
         public async Task<IActionResult> GetFavouritePosts([FromQuery] int userId)
         {
             var result = await _favouritePostService.GetListByUserIdAsync(userId);
-            if (!result.Success)
+            if (result.Success is false)
                 return BadRequest(result);
             return Ok(result);
         }
@@ -36,7 +36,7 @@ namespace Likegram.WepAPI.Controllers
         public async Task<IActionResult> DeleteOrAdd([FromBody] FavouritePostAddOrDeleteViewModel model)
         {
             var result = await _favouritePostService.GetByUserIdAndPostIdAsync(model.UserId, model.PostId);
-            if (!result.Success)
+            if (result.Success is false)
             {
                 FavouritePost favouritePost = new FluentEntity<FavouritePost>()
                     .AddParameter(f => f.UserId, model.UserId)
@@ -53,7 +53,7 @@ namespace Likegram.WepAPI.Controllers
         public async Task<IActionResult> Add([FromBody] FavouritePost favouritePost)
         {
             var result = await _favouritePostService.AddAsync(favouritePost);
-            if (!result.Success)
+            if (result.Success is false)
                 return BadRequest(result);
             return Ok(result);
         }
@@ -61,7 +61,7 @@ namespace Likegram.WepAPI.Controllers
         public async Task<IActionResult> Update([FromBody] FavouritePost favouritePost)
         {
             var result = await _favouritePostService.UpdateAsync(favouritePost);
-            if (!result.Success)
+            if (result.Success is false)
                 return BadRequest(result);
             return Ok(result);
         }
@@ -69,10 +69,10 @@ namespace Likegram.WepAPI.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             var favouritePostResult = await _favouritePostService.GetByIdAsync(id);
-            if (!favouritePostResult.Success)
+            if (favouritePostResult.Success is false)
                 return BadRequest(favouritePostResult);
             var result = await _favouritePostService.DeleteAsync(favouritePostResult.Data);
-            if (!result.Success)
+            if (result.Success is false)
                 return BadRequest(result);
             return Ok(result);
         }
