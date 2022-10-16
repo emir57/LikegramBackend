@@ -36,7 +36,7 @@ namespace Likegram.WepAPI.Controllers
             return Ok(result);
         }
 
-        [HttpPost("add")]
+        [HttpPost]
         public async Task<IActionResult> Add(CommentAnswer commentAnswer)
         {
             var result = await _commentAnswerService.Add(commentAnswer);
@@ -46,7 +46,7 @@ namespace Likegram.WepAPI.Controllers
             }
             return Ok(result);
         }
-        [HttpPut("update")]
+        [HttpPut]
         public async Task<IActionResult> Update(CommentAnswer commentAnswer)
         {
             var result = await _commentAnswerService.Update(commentAnswer);
@@ -56,8 +56,8 @@ namespace Likegram.WepAPI.Controllers
             }
             return Ok(result);
         }
-        [HttpDelete("delete")]
-        public async Task<IActionResult> Delete(int id)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete([FromRoute] int id)
         {
             var commentResult = await _commentAnswerService.GetById(id);
             if (commentResult.Data == null)

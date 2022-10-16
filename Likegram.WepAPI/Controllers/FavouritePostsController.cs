@@ -49,14 +49,6 @@ namespace Likegram.WepAPI.Controllers
             return Ok(deleteResult);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Add([FromBody] FavouritePost favouritePost)
-        {
-            var result = await _favouritePostService.AddAsync(favouritePost);
-            if (result.Success is false)
-                return BadRequest(result);
-            return Ok(result);
-        }
         [HttpPut]
         public async Task<IActionResult> Update([FromBody] FavouritePost favouritePost)
         {
