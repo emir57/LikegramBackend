@@ -19,7 +19,7 @@ namespace Likegram.DataAccess.Contexts
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=DESKTOP-HVLQH67\SQLEXPRESS;Database=LikegramDb;integrated security=true;");
+            optionsBuilder.UseSqlServer(@"Server=localhost,1433;Database=LikegramDb;User=sa;Password=Password123*");
         }
         public async override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
